@@ -1,0 +1,629 @@
+@charset "UTF-8";
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* Composición versión web */
+
+header {
+    padding: 20px;
+    background-image: url(/resources/dark_wood_background.jpg);
+    background-size: cover;
+    background-color: #333;
+}
+
+#header-ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#header-ul {
+    text-align: center;
+}
+
+nav {
+    padding: 10px;
+    background-color: #1a1000;
+}
+
+#nav-ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#nav-ul a {
+    text-align: center;
+    align-self: center;
+    color: whitesmoke;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+#nav-ul li a {
+    color: whitesmoke;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+/* Estilo de componentes y elementos*/
+
+#header-ul li a img {
+    max-height: 80px;
+    width: auto;
+    padding: 20px;
+}
+
+#nav-ul a img {
+    max-height: 32px;
+    width: auto;
+}
+
+#logo {
+    height: 128px;
+    width: auto;
+}
+
+/*---------------------------------------------------------------------------------------*/
+
+/* Estilos Base */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 1rem;
+    color: white;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li { margin: 0 15px; position: relative; }
+.nav-links a { color: white; text-decoration: none; }
+
+/* Dropdown Hover (Solo escritorio) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #444;
+    min-width: 160px;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content { display: block; }
+.dropdown-content li { margin: 0; }
+.dropdown-content a { padding: 10px; display: block; }
+
+/* Móvil / Responsive */
+.nav-toggle, .nav-toggle-label { display: none; }
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; 
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px; 
+        left: 0;
+        background-color: #333;
+    }
+    
+    .nav-links li { text-align: center; padding: 15px; border-bottom: 1px solid #555; }
+    
+    .dropdown:hover .dropdown-content {
+        position: relative; 
+    }
+
+    .nav-toggle-label { display: block; cursor: pointer; }
+    .nav-toggle-label span { 
+        display: block; width: 25px; height: 3px; background: white; margin-bottom: 5px; 
+        position: relative;
+    }
+    .nav-toggle-label span::before, .nav-toggle-label span::after {
+        content: ''; position: absolute; width: 25px; height: 3px; background: white; left: 0;
+    }
+    .nav-toggle-label span::before { top: -8px; }
+    .nav-toggle-label span::after { top: 8px; }
+
+    #nav-toggle:checked ~ .nav-links { display: flex; }
+}
+
+
+main {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+/* Contenedor Grid */
+.grid-dos-productos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+
+/* Tarjeta del Producto */
+.producto-hero {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.producto-hero:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.producto-imagen {
+    height: 300px; 
+    width: 100%;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.producto-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.producto-hero:hover .producto-imagen img {
+    transform: scale(1.05);
+}
+
+.producto-info {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1; /* Ocupa el espacio restante */
+}
+
+.producto-info h2 {
+    margin: 10px 0;
+    color: #1a1000;
+}
+
+.producto-info p {
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Etiquetas (Oferta/Novedad) */
+.etiqueta {
+    background-color: #e74c3c; /* Rojo oferta */
+    color: white;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 4px;
+    align-self: flex-start;
+}
+
+.etiqueta.novedad {
+    background-color: #2ecc71; /* Verde novedad */
+}
+
+/* Botón */
+.btn-comprar {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-top: auto;
+}
+
+.btn-comprar:hover {
+    background-color: #555;
+}
+
+/* --- RESPONSIVE PARA MÓVIL --- */
+@media (max-width: 768px) {
+    .grid-dos-productos {
+        grid-template-columns: 1fr;
+    }
+    
+    .producto-imagen {
+        height: 200px;
+    }
+}
+
+/* --- ESTILOS DEL FOOTER --- */
+
+.site-footer {
+    background-color: #1a1000; /* Mismo tono oscuro que tu menú */
+    color: #bbb; /* Gris claro para el texto, menos agresivo que el blanco puro */
+    padding-top: 60px;
+    margin-top: 50px; /* Separación del contenido principal */
+    border-top: 5px solid #333; /* Detalle estético superior */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex; /* Usamos Flexbox */
+    flex-wrap: wrap; /* Permite que las columnas bajen si no caben */
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.footer-col {
+    flex: 1; /* Todas las columnas intentan ocupar el mismo ancho */
+    min-width: 250px; /* Ancho mínimo antes de bajar de línea */
+    margin-bottom: 30px;
+}
+
+.footer-col h3 {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-col .social-links a i img {
+    height: 40px;
+    width: auto;
+}
+
+/* Pequeña línea decorativa bajo los títulos */
+.footer-col h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background-color: #e74c3c; /* Color de acento (rojo) */
+}
+
+.footer-col p {
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Listas del footer */
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-col a {
+    color: #bbb;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-col a:hover {
+    color: white;
+    padding-left: 5px; /* Efecto de movimiento al pasar el ratón */
+}
+
+/* Iconos de Contacto */
+.contact-info i {
+    margin-right: 10px;
+    color: #e74c3c;
+}
+
+/* Redes Sociales */
+.social-links {
+    margin-top: 20px;
+}
+
+.social-links a {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    line-height: 35px;
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: background 0.3s;
+}
+
+.social-links a:hover {
+    background-color: #e74c3c;
+}
+
+/* Newsletter Form */
+.newsletter-form {
+    display: flex;
+    margin-top: 15px;
+}
+
+.newsletter-form input {
+    padding: 10px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    width: 100%; /* Ocupa el espacio disponible */
+}
+
+.newsletter-form button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background 0.3s;
+    & img {
+        height: 25px;
+        width: auto;
+    }
+}
+
+.newsletter-form button:hover {
+    background-color: #c0392b;
+}
+
+/* Barra inferior */
+.footer-bottom {
+    background-color: #0f0900; /* Un tono aún más oscuro */
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    border-top: 1px solid #333;
+}
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 768px) {
+    .site-footer {
+        text-align: center; /* En móvil centramos todo */
+    }
+
+    .footer-col h3::after {
+        left: 50%; /* Centrar la línea decorativa */
+        transform: translateX(-50%);
+    }
+
+    .footer-col a:hover {
+        padding-left: 0; /* Quitamos el efecto de movimiento en móvil */
+    }
+    
+    .contact-info li {
+        display: flex;
+        justify-content: center; /* Centrar iconos y texto */
+        align-items: center;
+    }
+}
+
+/* --- ESTILOS PÁGINA DE PRODUCTO --- */
+
+.producto-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+.breadcrumbs a { color: #666; text-decoration: none; }
+.breadcrumbs a:hover { color: #e74c3c; }
+.breadcrumbs span { color: #333; font-weight: bold; }
+
+/* Layout Grid Principal */
+.producto-wrapper {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr; /* La imagen ocupa un poco más que el texto */
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+/* Galería de Imágenes */
+.imagen-principal {
+    width: 100%;
+    height: 500px; /* Altura fija para evitar saltos */
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.imagen-principal img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Muestra toda la imagen sin cortar */
+}
+
+.miniaturas {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.miniaturas img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s, border-color 0.3s;
+}
+
+.miniaturas img:hover {
+    opacity: 1;
+    border-color: #333;
+}
+
+/* Columna de Datos */
+.titulo-producto {
+    font-size: 2.2rem;
+    color: #1a1000;
+    margin-bottom: 5px;
+}
+
+.sku {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+/* Caja de Precio */
+.precio-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f4f4f4; /* Fondo sutil para destacar el precio */
+    border-radius: 8px;
+    width: fit-content;
+}
+
+.precio-antiguo {
+    text-decoration: line-through;
+    color: #888;
+    font-size: 1.1rem;
+}
+
+.precio-actual {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.etiqueta-oferta {
+    background-color: #e74c3c;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.stock-status {
+    color: #27ae60; /* Verde éxito */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.descripcion-corta {
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Botones de Compra */
+.acciones-compra {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.acciones-compra input {
+    width: 60px;
+    padding: 10px;
+    font-size: 1.1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.btn-anadir {
+    flex: 1; /* El botón ocupa el resto del espacio */
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-anadir:hover {
+    background-color: #c0392b;
+}
+
+/* Lista de características */
+.detalles-tecnicos {
+    background-color: #fff;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.detalles-tecnicos ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.detalles-tecnicos li {
+    padding: 8px 0;
+    border-bottom: 1px solid #f9f9f9;
+    color: #444;
+}
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 768px) {
+    .producto-wrapper {
+        grid-template-columns: 1fr; /* 1 sola columna */
+        gap: 20px;
+    }
+
+    .imagen-principal {
+        height: 300px; /* Más bajo en móvil */
+    }
+
+    .titulo-producto {
+        font-size: 1.8rem;
+    }
+
+    .miniaturas {
+        justify-content: center; /* Centrar miniaturas */
+    }
+}
