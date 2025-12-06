@@ -1,11 +1,8 @@
 <?php
-
 require '../TrabajoEnfoqueDesarrolloServidor/config/db.php';
-
 $errors = [];
-session_start();
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    session_start();
     $username = trim($_POST["username"] ?? '');
     $email = trim($_POST["email"] ?? '');
     $password = $_POST["password"] ?? '';
@@ -18,20 +15,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':email' => $email,
         ]);
         $user = $smt->fetch(PDO::FETCH_ASSOC);
-
         if ($user && password_verify($password, $user['password'])) {
             session_regenerate_id(true);
-            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['username'] = $user['username'];
-            $_SESSION['role'] = $user['role'];
-            header("Location: index.php");
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['rol'] = $user['rol'];
+            $_SESSION['name'] = $user['name'];
+            $_SESSION['surname1'] = $user['surname1'];
+            $_SESSION['surname2'] = $user['surname2'];
+            $_SESSION['address'] = $user['address'];
+            $_SESSION['city'] = $user['city'];
+            $_SESSION['zip_code'] = $user['zip_code'];
+            header("Location: index.php?var=user_profile");
             exit;
         } else {
-            $errors[] = "Usuario, contraseña o email incorrectos.";
+            $errors[] = "Usuario o contraseña incorrecto.";
         }
     } catch (PDOException $e) {
         $errors[] = "Error en el sistema.";
     }
 }
-
-//(ej: SELECT pedidos FROM pedidos WHERE user_id = $_SESSION['user_id']).
