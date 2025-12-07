@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="assets/css/userprofile-frame.css">
+<link rel="stylesheet" href="assets/css/userprofile.css">
 <?php
 $username = $_SESSION['username'] ?? '';
 $username = ucfirst($username);
@@ -14,25 +14,25 @@ $username = ucfirst($username);
         <div class="menu-options">
             <section class="user-view">
                 <div class="menu-btn my-data">
-                    <a href="index.php?var=user_profile&page=my_data">Mis datos</a>
+                    <a href="index.php?var=user_profile&view=my_data">Mis datos</a>
                 </div>
                 <div class="menu-btn orders">
-                    <a href="index.php?var=user_profile&page=orders">Pedidos</a>
+                    <a href="index.php?var=user_profile&view=orders">Pedidos</a>
                 </div>
             </section>
             <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1): ?>
                 <section class="admin-view">
                     <div class="menu-btn admin-users">
-                        <a href="index.php?var=user_profile&page=users">Administrar usuarios</a>
+                        <a href="index.php?var=user_profile&view=users">Administrar usuarios</a>
                     </div>
                     <div class="menu-btn add-items">
-                        <a href="index.php?var=user_profile&page=items">Añadir Objetos</a>
+                        <a href="index.php?var=user_profile&view=items">Añadir Objetos</a>
                     </div>
                     <div class="menu-btn orders-view">
-                        <a href="index.php?var=user_profile&page=admin_orders">Ver pedidos</a>
+                        <a href="index.php?var=user_profile&view=admin_orders">Ver pedidos</a>
                     </div>
                     <div class="menu-btn inventory-view">
-                        <a href="index.php?var=user_profile&page=inventory">Ver inventario</a>
+                        <a href="index.php?var=user_profile&view=inventory">Ver inventario</a>
                     </div>
                 </section>
             <?php endif; ?>
@@ -41,8 +41,8 @@ $username = ucfirst($username);
 
     <div class="section-content">
         <?php
-        $page = $_GET['page'] ?? '';
-        switch ($page) {
+        $view = $_GET['view'] ?? '';
+        switch ($view) {
             case 'my_data':
                 include 'includes/userprofile-views/my-data.php';
                 break;
@@ -57,6 +57,9 @@ $username = ucfirst($username);
                 break;
             case 'inventory':
                 include 'includes/userprofile-views/view-inventory.php';
+                break;
+            case 'items':
+                include 'includes/userprofile-views/add-items.php';
                 break;
             default:
                 break;
