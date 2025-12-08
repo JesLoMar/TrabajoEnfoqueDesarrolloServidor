@@ -1,9 +1,9 @@
-<link rel="stylesheet" href="assets/css/userprofile.css">
 <?php
 $username = $_SESSION['username'] ?? '';
 $username = ucfirst($username);
 ?>
 <main class="main-container">
+    <link rel="stylesheet" href="assets/css/userprofile.css">
     <div class="frame">
 
         <div class="avatar-container">
@@ -57,6 +57,9 @@ $username = ucfirst($username);
                 break;
             case 'inventory':
                 include 'includes/userprofile-views/view-inventory.php';
+                break;
+            case 'add_inventory';
+                include 'includes/userprofile-views/add-inventory.php';
                 break;
             case 'items':
                 include 'includes/userprofile-views/add-items.php';

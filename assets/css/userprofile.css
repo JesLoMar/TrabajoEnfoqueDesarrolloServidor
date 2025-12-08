@@ -112,7 +112,6 @@ body {
     max-width: 500px;
 }
 
-/* 2. Títulos */
 .mydata-title {
     font-size: 1.8rem;
     color: #333;
@@ -166,7 +165,6 @@ body {
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
-/* 4. Botón de Guardar */
 .btn-save {
     margin-top: 20px;
     padding: 12px 30px;

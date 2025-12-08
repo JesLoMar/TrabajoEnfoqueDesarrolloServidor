@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="assets/css/userprofile.css">
 <?php
 if (isset($_SESSION['user_id'])):
     $name = $_SESSION['name'] ?? '';
