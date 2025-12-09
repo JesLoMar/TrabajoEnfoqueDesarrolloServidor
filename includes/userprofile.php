@@ -36,6 +36,11 @@ $username = ucfirst($username);
                     </div>
                 </section>
             <?php endif; ?>
+            <section class="user-view">
+                <div class="menu-btn my-data">
+                    <a href="logout.php">Cerrar sesión</a>
+                </div>
+            </section>
         </div>
     </div>
 

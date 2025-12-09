@@ -22,6 +22,11 @@ try {
 
 <section class="main-orders">
     <h1 class="orders-title">Mis pedidos</h1>
+    <?php if (isset($_GET['status']) && $_GET['status'] === 'success_order'): ?>
+    <div class="alert-success" style="padding: 15px; margin-bottom: 20px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px; text-align: center;">
+        ¡Pedido realizado con éxito! Gracias por tu compra.
+    </div>
+<?php endif; ?>
     <h3 class="orders-subtitle">Aquí podrá visualizar el historial de pedidos que ha hecho con su cuenta</h3>
 
     <?php if (empty($orders)): ?>

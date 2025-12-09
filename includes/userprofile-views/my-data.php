@@ -12,11 +12,17 @@ endif;
     <h1 class="mydata-title">Mis datos</h1>
     <h3 class="mydata-subtitle">Edite la información de su cuenta</h3>
 
-    <?php if (isset($_GET['status'])): ?>
+<?php if (isset($_GET['status'])): ?>
 
         <?php if ($_GET['status'] === 'success'): ?>
             <div class="alert-success" style="padding: 15px; margin-bottom: 20px; border-radius: 5px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; text-align: center;">
                 Datos actualizados correctamente.
+            </div>
+
+        <?php elseif ($_GET['status'] === 'missing_address'): ?>
+            <div class="alert-warning" style="padding: 15px; margin-bottom: 20px; border-radius: 5px; background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; text-align: center;">
+                <strong>¡Atención!</strong><br>
+                Para poder procesar tu pedido, necesitamos que guardes tu dirección de envío completa (Dirección, Ciudad y Código Postal).
             </div>
 
         <?php elseif ($_GET['status'] === 'error' && isset($_SESSION['errores_update'])): ?>
@@ -28,7 +34,7 @@ endif;
                 <?php unset($_SESSION['errores_update']); ?>
             </div>
         <?php endif; ?>
-
+        
     <?php endif; ?>
 
     <div class="mydata-personaldata">

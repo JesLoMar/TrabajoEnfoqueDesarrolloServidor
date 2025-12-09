@@ -20,7 +20,7 @@
         <ul id="header-ul">
             <li><a href="index.php?var=login"><img src="assets/img/user.png" /></a></li>
             <li><img src="assets/img/icon.png" id="logo" /></li>
-            <li><a href=""><img src="assets/img/shopping-cart.png" /></a></li>
+            <li><a href="index.php?var=shopping_cart"><img src="assets/img/shopping-cart.png" /></a></li>
         </ul>
     </header>
     <nav class="navbar">

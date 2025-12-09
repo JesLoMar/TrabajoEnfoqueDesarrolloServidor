@@ -1,168 +1,209 @@
-<!DOCTYPE html>
-<html lang="es">
+<link rel="stylesheet" href="assets/css/product.css">
 
-<head>
-    <!-- Datos generales e imprescindibles -->
-    <meta charset="UTF-8" />
-    <title> Vientos del Sur </title>
-    <!-- Etiquetas para SEO -->
-    <meta name="description" content="Página web para la compra ficticia de artículos musicales ficticios.">
-    <meta name="author" content="Jesús López Martínez">
-    <meta name="generator" content="VSCode">
-    <meta name="google" content="notranslate">
-    <meta name="robots" content="noindex, nofollow, noimageindex">
-    <!-- Recursos externos -->
-    <link rel="icon" href="resources/logo_sin_texto.png" />
-    <link rel="stylesheet" href="css/main-page.css">
-</head>
+<?php
+session_start();
+require 'config/db.php';
 
-<body>
-    <header>
-        <ul id="header-ul">
-            <li><a href=""><img src="resources/user.png" /></a></li>
-            <li><img src="resources/vientos-del-sur-high-resolution-logo-transparent.png" id="logo" /></li>
-            <li><a href=""><img src="resources/shopping-cart.png" /></a></li>
-        </ul>
-    </header>
-    <nav class="navbar">
-        <input type="checkbox" id="nav-toggle" class="nav-toggle">
-        <label for="nav-toggle" class="nav-toggle-label">
-            <span></span>
-        </label>
+$product_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li class="dropdown">
-                <a href="#">Instrumentos <i class="fa fa-caret-down"></i></a>
-                <ul class="dropdown-content">
-                    <li><a href="#">Guitarras y bajos</a></li>
-                    <li><a href="#">Teclados y pianos</a></li>
-                    <li><a href="#">Baterías</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#">Accesorios <i class="fa fa-caret-down"></i></a>
-                <ul class="dropdown-content">
-                    <li><a href="#">Cables</a></li>
-                    <li><a href="#">Fundas</a></li>
-                    <li><a href="#">Correas</a></li>
-                    <li><a href="#">Soportes</a></li>
-                </ul>
-            </li>
-            <li><a href="https://dle.rae.es/servicio" target="_blank">Servicios</a></li>
-        </ul>
-    </nav>
+if ($product_id <= 0) {
+    header("Location: index.php");
+    exit;
+}
 
-    <main class="producto-main">
-        <section class="producto-wrapper">
-            <div class="producto-galeria">
-                <div class="imagen-principal">
-                    <img id="main-img" src="resources/guitarra_clasica.png" alt="Fender Stratocaster Frontal">
-                </div>
-                <div class="miniaturas">
-                    <img src="resources/guitarra_electrica.png" onclick="changeImage(this)" alt="Vista frontal">
-                    <img src="resources/pandereta.png" onclick="changeImage(this)" alt="Vista trasera"> <img
-                        src="resources/guitarra_clasica.png" onclick="changeImage(this)" alt="Detalle pastillas">
-                    <img src="resources/armonica.png" onclick="changeImage(this)" alt="Pala">
-                </div>
-            </div>
+$product = null;
+$available_sizes = [];
 
-            <div class="producto-datos">
-                <h1 class="titulo-producto">Guitarra</h1>
-                <p class="sku">Ref: FND-STRAT-60-SB</p>
+try {
+    $sql_product = "SELECT i.*, b.brand_name 
+                    FROM items i 
+                    JOIN brands b ON i.brand_id = b.brand_id 
+                    WHERE i.item_id = :id";
+    $stmt = $pdo->prepare($sql_product);
+    $stmt->execute([':id' => $product_id]);
+    $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                <div class="precio-box">
-                    <span class="precio-antiguo">1.200€</span>
-                    <span class="precio-actual">980€</span>
-                    <span class="etiqueta-oferta">-18%</span>
-                </div>
+    if (!$product) {
+        header("Location: index.php");
+        exit;
+    }
 
-                <p class="stock-status"><i class="fa fa-check-circle"></i> En Stock (Envío en 24h)</p>
+    $sql_stock = "SELECT s.size_id, s.size_name, inv.stock_quantity 
+                FROM inventory inv 
+                JOIN sizes s ON inv.size_id = s.size_id 
+                WHERE inv.item_id = :id AND inv.stock_quantity > 0 
+                ORDER BY s.size_id ASC";
 
-                <p class="descripcion-corta">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
-                </p>
+    $stmt_stock = $pdo->prepare($sql_stock);
+    $stmt_stock->execute([':id' => $product_id]);
+    $available_sizes = $stmt_stock->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Error al cargar producto.");
+}
+require 'includes/header.php';
+?>
 
-                <div class="acciones-compra">
-                    <input type="number" value="1" min="1" max="5">
-                    <button class="btn-anadir">Añadir al Carrito</button>
-                </div>
+<link rel="stylesheet" href="assets/css/product.css">
 
-                <div class="detalles-tecnicos">
-                    <h3>Características Destacadas</h3>
-                    <ul>
-                        <li><strong>Cuerpo:</strong> --- </li>
-                        <li><strong>Mástil:</strong> --- </li>
-                        <li><strong>Diapasón:</strong> --- </li>
-                        <li><strong>Pastillas:</strong> ---</li>
-                        <li><strong>Puente:</strong> --- </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </main>
+<main class="product-container">
 
-    <footer class="site-footer">
-        <div class="footer-container">
-            <div class="footer-col">
-                <h3>Vientos del Sur</h3>
-                <p>Tu tienda de confianza para instrumentos musicales ficticios. Desde guitarras clásicas hechas de
-                    ilusión hasta sintetizadores
-                    modernos con 0% de materia física, llevamos la música a tu hogar.</p>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/?locale=es_ES" target="_blank"><i class="fa fa-facebook"><img
-                                src="resources/facebook.png" /></i></a>
-                    <a href="https://www.instagram.com" target="_blank"><i class="fa fa-instagram"><img
-                                src="resources/instagram.png" /></i></a>
-                    <a href="https://x.com/?lang=es" target="_blank"><i class="fa fa-x"><img
-                                src="resources/twitter.png" /></i></a>
-                    <a href="https://www.youtube.com" target="_blank"><i class="fa fa-youtube"><img
-                                src="resources/youtube.png" /></i></a>
-                </div>
-            </div>
+    <div class="product-gallery">
+        <img src="<?php echo htmlspecialchars($product['image_url']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" class="main-image">
+    </div>
 
-            <div class="footer-col">
-                <h3>Atención al Cliente</h3>
-                <ul>
-                    <li><a href="#">Envíos y Devoluciones</a></li>
-                    <li><a href="#">Preguntas Frecuentes</a></li>
-                    <li><a href="#">Garantía</a></li>
-                    <li><a href="#">Estado del pedido</a></li>
-                </ul>
-            </div>
+    <div class="product-details">
 
-            <div class="footer-col">
-                <h3>Contacto</h3>
-                <ul class="contact-info">
-                    <li><i class="fa fa-map-marker"></i> Calle Mentira 111, Sevilla</li>
-                    <li><i class="fa fa-phone"></i> +34 XXX XXX XXX</li>
-                    <li><i class="fa fa-envelope"></i> hola@vientosdelsur.com</li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h3>Newsletter</h3>
-                <p>Suscríbete para recibir ofertas exclusivas.</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Tu email aquí..." required>
-                    <button type="submit"><img src="resources/send.png" /></button>
-                </form>
-            </div>
+        <div class="product-header">
+            <span class="brand-tag"><?php echo htmlspecialchars($product['brand_name']); ?></span>
+            <h1 class="product-title"><?php echo htmlspecialchars($product['name']); ?></h1>
+            <p class="sku">SKU: <?php echo htmlspecialchars($product['sku']); ?></p>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Vientos del Sur. Todos los derechos reservados, si fuese una web de verdad.</p>
-        </div>
-    </footer>
 
-    <script>
-        function changeImage(thumbnail) {
-            document.getElementById('main-img').src = thumbnail.src;
+        <div class="product-price">
+            <?php echo number_format($product['price'], 2); ?> €
+        </div>
+
+        <div class="product-description">
+            <p><?php echo nl2br(htmlspecialchars($product['description'])); ?></p>
+        </div>
+
+        <form action="actions/add_to_cart.php" method="POST" class="add-cart-form">
+            <input type="hidden" name="item_id" value="<?php echo $product['item_id']; ?>">
+
+            <div class="options-grid">
+                <div class="option-group">
+                    <div class="label-row">
+                        <label for="size">Talla</label>
+                        <button type="button" class="btn-size-guide" onclick="openModal()">Guía de Tallas</button>
+                    </div>
+
+                    <select name="size_id" id="size" required class="form-select">
+                        <option value="">Selecciona tu talla</option>
+                        <?php foreach ($available_sizes as $size): ?>
+                            <option value="<?php echo $size['size_id']; ?>">
+                                <?php echo htmlspecialchars($size['size_name']); ?>
+                                <?php if ($size['stock_quantity'] < 3) echo " (¡Quedan pocas!)"; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+
+                    <?php if (empty($available_sizes)): ?>
+                        <p class="out-of-stock">Producto agotado temporalmente</p>
+                    <?php endif; ?>
+                </div>
+
+                <div class="option-group">
+                    <label for="quantity">Cantidad</label>
+                    <input type="number" name="quantity" id="quantity" value="1" min="1" class="form-input"> <!-- Aquí tendré que establecer el máximo de artículos permitidos consultando en la base de datos cuál es el máximo actual. -->
+                </div>
+            </div>
+
+            <button type="submit" class="btn-add-cart" <?php echo empty($available_sizes) ? 'disabled' : ''; ?>>
+                Añadir al Carrito
+            </button>
+        </form>
+
+        <div class="product-meta">
+            <p>Envío gratuito en pedidos superiores a 100€</p>
+            <p>Devoluciones gratuitas en 30 días</p>
+        </div>
+    </div>
+</main>
+
+<?php require 'includes/footer.php'; ?>
+
+<div id="sizeModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <h2>Guía de Tallas</h2>
+        <p>Utiliza esta tabla para encontrar tu talla perfecta.</p>
+
+        <table class="size-guide-table">
+            <thead>
+                <tr>
+                    <th>EU</th>
+                    <th>US (Hombre)</th>
+                    <th>US (Mujer)</th>
+                    <th>CM</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>36</td>
+                    <td>4.5</td>
+                    <td>6</td>
+                    <td>23.5</td>
+                </tr>
+                <tr>
+                    <td>37</td>
+                    <td>5</td>
+                    <td>6.5</td>
+                    <td>23.8</td>
+                </tr>
+                <tr>
+                    <td>38</td>
+                    <td>6</td>
+                    <td>7.5</td>
+                    <td>24.5</td>
+                </tr>
+                <tr>
+                    <td>39</td>
+                    <td>7</td>
+                    <td>8.5</td>
+                    <td>25.1</td>
+                </tr>
+                <tr>
+                    <td>40</td>
+                    <td>7.5</td>
+                    <td>9</td>
+                    <td>25.4</td>
+                </tr>
+                <tr>
+                    <td>41</td>
+                    <td>8.5</td>
+                    <td>10</td>
+                    <td>26.0</td>
+                </tr>
+                <tr>
+                    <td>42</td>
+                    <td>9</td>
+                    <td>11</td>
+                    <td>26.7</td>
+                </tr>
+                <tr>
+                    <td>43</td>
+                    <td>10</td>
+                    <td>12</td>
+                    <td>27.3</td>
+                </tr>
+                <tr>
+                    <td>44</td>
+                    <td>10.5</td>
+                    <td>-</td>
+                    <td>27.9</td>
+                </tr>
+                <tr>
+                    <td>45</td>
+                    <td>11.5</td>
+                    <td>-</td>
+                    <td>28.6</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function openModal() {
+        document.getElementById("sizeModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("sizeModal").style.display = "none";
+    }
+    window.onclick = function(event) {
+        if (event.target == document.getElementById("sizeModal")) {
+            closeModal();
         }
-    </script>
-</body>
-
-</html>
+    }
+</script>

@@ -24,27 +24,27 @@ try {
         ':size' => $size_id
     ]);
     
-    $registro_existente = $stmt_check->fetch(PDO::FETCH_ASSOC);
+    $current_record = $stmt_check->fetch(PDO::FETCH_ASSOC);
 
-    if ($registro_existente) {
+    if ($current_record) {
         $sql_update = "UPDATE inventory SET stock_quantity = stock_quantity + :qty WHERE inventory_id = :inv_id";
         $stmt_update = $pdo->prepare($sql_update);
-        $resultado = $stmt_update->execute([
+        $outcome = $stmt_update->execute([
             ':qty'    => $quantity,
-            ':inv_id' => $registro_existente['inventory_id']
+            ':inv_id' => $current_record['inventory_id']
         ]);
         
     } else {
         $sql_insert = "INSERT INTO inventory (item_id, size_id, stock_quantity) VALUES (:item, :size, :qty)";
         $stmt_insert = $pdo->prepare($sql_insert);
-        $resultado = $stmt_insert->execute([
+        $outcome = $stmt_insert->execute([
             ':item' => $item_id,
             ':size' => $size_id,
             ':qty'  => $quantity
         ]);
     }
 
-    if ($resultado) {
+    if ($outcome) {
         header("Location: ../index.php?var=user_profile&view=inventory&status=success");
         exit;
     } else {

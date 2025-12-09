@@ -23,6 +23,9 @@ switch ($section) {
     case 'user_profile':
         include 'includes/userprofile.php';
         break;
+    case 'shopping_cart':
+        include 'includes/shoppingcart.php';
+        break;
     default:
         break;
 }
