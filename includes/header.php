@@ -34,31 +34,31 @@
             <li class="dropdown">
                 <a href="#">Casas de lujo<i class="fa fa-caret-down"></i></a>
                 <ul class="dropdown-content">
-                    <li><a href="#">Balenciaga</a></li>
-                    <li><a href="#">Gucci</a></li>
-                    <li><a href="#">Louis Vuitton</a></li>
-                    <li><a href="#">Alexander McQueen</a></li>
-                    <li><a href="#">Versace</a></li>
-                    <li><a href="#">Dior</a></li>
-                    <li><a href="#">Christian Louboutin</a></li>
+                    <li><a href="index.php?brand=Balenciaga">Balenciaga</a></li>
+                    <li><a href="index.php?brand=Gucci">Gucci</a></li>
+                    <li><a href="index.php?brand=Louis Vuitton">Louis Vuitton</a></li>
+                    <li><a href="index.php?brand=Alexander McQueen">Alexander McQueen</a></li>
+                    <li><a href="index.php?brand=Versace">Versace</a></li>
+                    <li><a href="index.php?brand=Dior">Dior</a></li>
+                    <li><a href="index.php?brand=Christian">Christian Louboutin</a></li>
                 </ul>
             </li>
             <li class="dropdown">
                 <a href="#">Diseño de autor<i class="fa fa-caret-down"></i></a>
                 <ul class="dropdown-content">
-                    <li><a href="#">Off-White</a></li>
-                    <li><a href="#">Rick Owens</a></li>
-                    <li><a href="#">Golden Goose</a></li>
-                    <li><a href="#">Common Projects</a></li>
+                    <li><a href="index.php?brand=Off-White">Off-White</a></li>
+                    <li><a href="index.php?brand=Rick Owens">Rick Owens</a></li>
+                    <li><a href="index.php?brand=Golden Goose">Golden Goose</a></li>
+                    <li><a href="index.php?brand=Common Projects">Common Projects</a></li>
                 </ul>
             </li>
             <li class="dropdown">
                 <a href="#">Ediciones limitadas<i class="fa fa-caret-down"></i></a>
                 <ul class="dropdown-content">
-                    <li><a href="#">Air Jordan Retro</a></li>
-                    <li><a href="#">Yeezy</a></li>
-                    <li><a href="#">Nike x Off-White</a></li>
-                    <li><a href="#">Nike x Sacai</a></li>
+                    <li><a href="index.php?brand=Air Jordan Retro">Air Jordan Retro</a></li>
+                    <li><a href="index.php?brand=Yeezy">Yeezy</a></li>
+                    <li><a href="index.php?brand=Nike x Off-White">Nike x Off-White</a></li>
+                    <li><a href="index.php?brand=Nike x Sacai">Nike x Sacai</a></li>
                 </ul>
             </li>
             <li><a href="#">Sobre nosotros</a></li>

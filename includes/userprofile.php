@@ -37,8 +37,8 @@ $username = ucfirst($username);
                 </section>
             <?php endif; ?>
             <section class="user-view">
-                <div class="menu-btn my-data">
-                    <a href="logout.php">Cerrar sesión</a>
+                <div class="menu-btn logout">
+                    <a href="index.php?var=logout">Cerrar sesión</a>
                 </div>
             </section>
         </div>
@@ -53,6 +53,9 @@ $username = ucfirst($username);
                 break;
             case 'orders':
                 include 'includes/userprofile-views/orders.php';
+                break;
+            case 'order_details':
+                include 'includes/userprofile-views/view-order-details.php';
                 break;
             case 'users':
                 include 'includes/userprofile-views/admin-users.php';

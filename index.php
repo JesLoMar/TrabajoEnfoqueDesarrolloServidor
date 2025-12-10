@@ -26,7 +26,11 @@ switch ($section) {
     case 'shopping_cart':
         include 'includes/shoppingcart.php';
         break;
+    case 'logout':
+        include 'actions/logout.php';
+        break;
     default:
+        include 'includes/general-display.php';
         break;
 }
 

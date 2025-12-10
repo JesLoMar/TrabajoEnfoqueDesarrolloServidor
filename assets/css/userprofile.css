@@ -99,6 +99,20 @@ body {
     gap: 5px;
 }
 
+.menu-btn.logout {
+    background-color: #d9534f;
+    margin-top: 20px;
+    border: 1px solid #d43f3a;
+}
+
+.menu-btn.logout a {
+    color: white;
+    font-weight: bold;
+}
+
+.menu-btn.logout:hover {
+    background-color: #971b16;
+}
 /*
     -----ESTILOS DE LA SECCIÓN MY-DATA-----
 */
