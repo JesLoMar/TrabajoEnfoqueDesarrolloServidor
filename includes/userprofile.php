@@ -63,6 +63,12 @@ $username = ucfirst($username);
             case 'admin_orders':
                 include 'includes/userprofile-views/view-orders.php';
                 break;
+            case 'manage_items':
+                include 'includes/userprofile-views/manage-items.php';
+                break;
+            case 'edit_item':
+                include 'includes/userprofile-views/edit-item.php';
+                break;
             case 'inventory':
                 include 'includes/userprofile-views/view-inventory.php';
                 break;

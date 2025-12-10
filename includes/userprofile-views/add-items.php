@@ -84,4 +84,8 @@ try {
     </div>
 
     <button type="submit" class="btn-save">Añadir objeto</button>
+
+    <a href="index.php?var=user_profile&view=manage_items" class="btn-save" style="background-color: #6c757d; text-decoration: none; text-align: center;">
+        Ir a Gestión de Artículos
+    </a>
 </form>
