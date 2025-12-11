@@ -1,10 +1,7 @@
 <?php
-
 require '../TrabajoEnfoqueDesarrolloServidor/config/db.php';
-
 $errors = [];
 $data = [];
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST["username"] ?? '';
     $email = $_POST["email"] ?? '';
@@ -16,18 +13,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $address = $_POST["address"] ?? '';
     $city = $_POST["city"] ?? '';
     $zipCode = $_POST["zip_code"] ?? '';
-
     $data = $_POST;
-
     $errors = validate($username, $email, $password, $passwordConfirm, $name, $surname1, $surname2, $address, $city, $zipCode);
-
     if (empty($errors)) {
         try {
             $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+            //Añadimos los valores indicados por el usuario en la base de datos si no hay problemas.
             $sql = "INSERT INTO user (username, email, password, name, surname1, surname2, address, city, zip_code) 
                     VALUES (:username, :email, :password, :name, :surname1, :surname2, :address, :city, :zip_code)";
             $smt = $pdo->prepare($sql);
-
             $smt->execute([
                 ':username' => $username,
                 ':email' => $email,
@@ -39,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ':city' => $city,
                 ':zip_code' => $zipCode,
             ]);
-
             echo "Usuario registrado!";
             header("Location: index.php");
             exit;
@@ -54,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 function validate($username, $email, $password, $passwordConfirm, $name, $surname1, $surname2, $address, $city, $zipCode)
-{
+{ //Función de validación de datos del formulario.
     $localErrors = [];
     if (empty($username)) {
         $localErrors[] = "El nombre de usuario es obligatorio.";
@@ -97,6 +90,5 @@ function validate($username, $email, $password, $passwordConfirm, $name, $surnam
             $localErrors[] = "El código postal ha de ser numérico.";
         }
     }
-
     return $localErrors;
 };

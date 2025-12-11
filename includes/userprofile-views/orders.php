@@ -1,16 +1,13 @@
 <?php
+//seccion similar a view-orders.php pero simplificada para el usuario, aquí solo se muestran los pedidos propios.
 if (!isset($_SESSION['user_id'])) {
     exit;
 }
-
 require 'config/db.php';
-
 $user_id = $_SESSION['user_id'];
 $orders = [];
-
 try {
     $sql = "SELECT * FROM orders WHERE user_id = :uid ORDER BY order_time DESC";
-
     $stmt = $pdo->prepare($sql);
     $stmt->execute([':uid' => $user_id]);
     
@@ -30,9 +27,9 @@ try {
     <h3 class="orders-subtitle">Aquí podrá visualizar el historial de pedidos que ha hecho con su cuenta</h3>
 
     <?php if (empty($orders)): ?>
-            <div style="text-align: center; padding: 40px; color: #666;">
+            <div>
                 <p>Aún no has realizado ninguna compra.</p>
-                <a href="index.php" style="color: #707070; font-weight: bold;">Ir a la tienda</a>
+                <a href="index.php" style="color: #8a8a8aff; font-weight: bold;">Ir a la tienda</a>
             </div>
     <?php else: ?>
         <div class="table-responsive">

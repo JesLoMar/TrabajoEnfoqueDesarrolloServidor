@@ -5,30 +5,30 @@ if (!isset($_SESSION['user_id']) || $_SERVER['REQUEST_METHOD'] !== 'POST' || !is
     header("Location: ../index.php?var=login");
     exit;
 }
-
 try {
     $target_id = (int)($_POST['target_user_id'] ?? 0);
     if ($target_id === $_SESSION['user_id']) {
         header("Location: ../index.php?var=user_profile&view=users&status=error_self");
         exit;
     }
-
     if ($target_id > 0) {
-        $pdo->beginTransaction();
+        //Eliminamos la tabla de objetos de las ordenes.
+        $pdo->beginTransaction();// Si algo falla se cancela todo
         $sql_items = "DELETE oi FROM order_items oi 
                     INNER JOIN orders o ON oi.order_id = o.order_id 
                     WHERE o.user_id = :id";
         $stmt1 = $pdo->prepare($sql_items);
         $stmt1->execute([':id' => $target_id]);
+        //Eliminamos las ordenes del usuario como tal.
         $sql_orders = "DELETE FROM orders WHERE user_id = :id";
         $stmt2 = $pdo->prepare($sql_orders);
         $stmt2->execute([':id' => $target_id]);
+        //Eliminamos por ultimo al usuario.
         $sql_user = "DELETE FROM user WHERE user_id = :id";
         $stmt3 = $pdo->prepare($sql_user);
         $stmt3->execute([':id' => $target_id]);
         $pdo->commit();
-
-        header("Location: ../index.php?var=user_profile&view=users&status=deleted");
+        header("Location: ../index.php?var=user_profile&view=users&status=deleted"); //Mostramos status de usuario eliminado.
         exit;
     }
 } catch (PDOException $e) {

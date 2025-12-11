@@ -1,11 +1,12 @@
-<link rel="stylesheet" href="assets/css/auth.css">
-<?php if (!empty($errors)): ?>
+<?php if (!empty($errors)): //Muestra de errores.?>
     <div class="alert alert-danger" style="background: #f8d7da; color: #721c24; padding: 10px; margin-bottom: 20px;">
         <?php foreach ($errors as $error) echo "<p>$error</p>"; ?>
     </div>
 <?php endif; ?>
+<link rel="stylesheet" href="assets/css/auth.css">
 <main class="userForm">
-    <div class="auth-card" style="max-width: 600px;"> <?php if (!empty($errors)): ?>
+    <div class="auth-card" style="max-width: 600px;">
+        <?php if (!empty($errors)): ?>
         <?php endif; ?>
         <h2>Crear nueva cuenta</h2>
 

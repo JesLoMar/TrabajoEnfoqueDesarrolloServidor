@@ -1,10 +1,10 @@
 <?php
 require_once 'config/db.php';
+//En esta vista mostramos todos los objetos y permitimos modificar cada uno individualmente a través de "edit-item.php".
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 1) {
     echo "<div class='alert-error'>Acceso denegado.</div>";
     return;
 }
-
 $items = [];
 try {
     $sql = "SELECT i.*, b.brand_name 
@@ -17,19 +17,16 @@ try {
     echo "<div class='alert-error'>Error al cargar artículos.</div>";
 }
 ?>
-
 <section class="main-mydata">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
-        <h1 class="mydata-title" style="margin-bottom: 0; border: none;">Gestión de Artículos</h1>
+    <div>
+        <h1 class="mydata-title">Gestión de Artículos</h1>
         <a href="index.php?var=user_profile&view=items" class="btn-save">+ Añadir Nuevo</a>
     </div>
-
     <?php if (isset($_GET['status']) && $_GET['status'] === 'updated'): ?>
         <div class="alert-success">
             Artículo actualizado correctamente.
         </div>
     <?php endif; ?>
-
     <div class="table-responsive">
         <table class="inventory-table">
             <thead>

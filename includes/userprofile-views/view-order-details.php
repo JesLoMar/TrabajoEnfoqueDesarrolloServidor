@@ -1,28 +1,21 @@
 <?php
-// includes/userprofile-views/view-order-details.php
-
-// 1. Verificar si hay usuario logueado (sesión iniciada en el padre)
 if (!isset($_SESSION['user_id'])) {
     echo "<div class='alert-error'>Debes iniciar sesión.</div>";
     return;
 }
-
 require_once 'config/db.php';
 
-// 2. Validar que viene un ID
+// Validacion de ID.
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     echo "<div class='alert-error'>Pedido no especificado.</div>";
     return;
 }
-
 $order_id = (int)$_GET['id'];
 $current_user_id = $_SESSION['user_id'];
-// Determinamos si es admin (asumiendo rol 1 = admin)
+// Comprobación de admin.
 $is_admin = (isset($_SESSION['rol']) && $_SESSION['rol'] == 1);
 
 try {
-    // 3. CONSULTA PRINCIPAL
-    // Obtenemos los datos del pedido INCLUYENDO el user_id del comprador para verificar seguridad
     $sql_header = "
         SELECT 
             o.order_id, o.order_time, o.order_price, o.order_shipping_address, o.order_state, o.user_id,
@@ -36,20 +29,17 @@ try {
     $stmt = $pdo->prepare($sql_header);
     $stmt->execute([':id' => $order_id]);
     $pedido = $stmt->fetch(PDO::FETCH_ASSOC);
-
     if (!$pedido) {
         echo "<div class='alert-error'>El pedido no existe.</div>";
         return;
     }
-
-    // 4. CANDADO DE SEGURIDAD
-    // Si NO es admin Y el pedido NO pertenece al usuario logueado -> Bloquear
+    // Si no es admin y el pedido no pertenece al usuario logueado lo bloquea
     if (!$is_admin && $pedido['user_id'] != $current_user_id) {
-        echo "<div class='alert-error'>⛔ No tienes permiso para ver este pedido.</div>";
+        echo "<div class='alert-error'>No tienes permiso para ver este pedido.</div>";
         return;
     }
 
-    // 5. Obtener los productos (Items)
+    //Obtiene los productos
     $sql_items = "
         SELECT 
             oi.quantity, oi.unit_price, 
@@ -64,24 +54,20 @@ try {
     $stmtItems->execute([':id' => $order_id]);
     $items = $stmtItems->fetchAll(PDO::FETCH_ASSOC);
 
-    // 6. Cargar lista de estados (SOLO SI ES ADMIN, para ahorrar recursos)
+    //Cargar lista de estados solo si es admin
     $estados_posibles = [];
     if ($is_admin) {
         $stmtStates = $pdo->query("SELECT * FROM order_state");
         $estados_posibles = $stmtStates->fetchAll(PDO::FETCH_ASSOC);
     }
-
 } catch (PDOException $e) {
     echo "<div class='alert-error'>Error de base de datos.</div>";
     return;
 }
-
-// 7. Configurar enlace 'Volver' dinámicamente
 $back_link = $is_admin 
     ? "index.php?var=user_profile&view=admin_orders"  // Admin vuelve a la lista global
     : "index.php?var=user_profile&view=orders";       // Usuario vuelve a sus pedidos
 ?>
-
 <section class="main-mydata">
     
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
@@ -94,11 +80,11 @@ $back_link = $is_admin
     <?php if (isset($_GET['status'])): ?>
         <?php if ($_GET['status'] === 'success'): ?>
             <div style="padding:10px; background:#d4edda; color:#155724; border-radius:4px; margin-bottom:15px; text-align:center;">
-                ✅ Estado actualizado correctamente.
+                Estado actualizado correctamente.
             </div>
         <?php elseif ($_GET['status'] === 'error'): ?>
             <div style="padding:10px; background:#f8d7da; color:#721c24; border-radius:4px; margin-bottom:15px; text-align:center;">
-                ❌ Hubo un error al actualizar.
+                Hubo un error al actualizar.
             </div>
         <?php endif; ?>
     <?php endif; ?>
@@ -170,7 +156,7 @@ $back_link = $is_admin
     <?php if ($is_admin): ?>
         <div style="margin-top: 40px; background: #eef2f5; padding: 20px; border-radius: 8px; border: 1px solid #dbe2e8;">
             <h4 style="margin-top: 0; color: #2c3e50; display:flex; align-items:center; gap:10px;">
-                ⚙️ Gestión Administrativa
+                Gestión Administrativa
             </h4>
             <p style="font-size: 0.9em; margin-bottom: 15px; color: #666;">Modifica el estado del envío para que el cliente pueda ver el progreso.</p>
             

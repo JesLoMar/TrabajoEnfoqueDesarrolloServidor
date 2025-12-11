@@ -1,9 +1,8 @@
-<link rel="stylesheet" href="assets/css/product.css">
-
 <?php
 session_start();
 require 'config/db.php';
 
+//Almacenamos la ID del objeto
 $product_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 if ($product_id <= 0) {
@@ -14,6 +13,7 @@ if ($product_id <= 0) {
 $product = null;
 $available_sizes = [];
 
+//Consultas de los datos del objeto según su ID
 try {
     $sql_product = "SELECT i.*, b.brand_name 
                     FROM items i 
@@ -44,9 +44,7 @@ require 'includes/header.php';
 ?>
 
 <link rel="stylesheet" href="assets/css/product.css">
-
 <main class="product-container">
-
     <div class="product-gallery">
         <img src="<?php echo htmlspecialchars($product['image_url']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" class="main-image">
     </div>
@@ -94,7 +92,7 @@ require 'includes/header.php';
 
                 <div class="option-group">
                     <label for="quantity">Cantidad</label>
-                    <input type="number" name="quantity" id="quantity" value="1" min="1" class="form-input"> <!-- Aquí tendré que establecer el máximo de artículos permitidos consultando en la base de datos cuál es el máximo actual. -->
+                    <input type="number" name="quantity" id="quantity" value="1" min="1" class="form-input"> <!-- Aquí tendré que establecer el máximo de artículos permitidos consultando en la base de datos cuál es el máximo actual. (No implementado actualmente) -->
                 </div>
             </div>
 
@@ -111,7 +109,7 @@ require 'includes/header.php';
 </main>
 
 <?php require 'includes/footer.php'; ?>
-
+<!-- Modal a mostrar al clicar la guia de tallas -->
 <div id="sizeModal" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeModal()">&times;</span>
@@ -193,6 +191,7 @@ require 'includes/header.php';
     </div>
 </div>
 
+<!-- Script simple para controlar la visibilidad del modal -->
 <script>
     function openModal() {
         document.getElementById("sizeModal").style.display = "block";

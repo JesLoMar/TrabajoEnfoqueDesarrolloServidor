@@ -3,12 +3,10 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['rol']) || $_SESSION['rol']
     echo "<div class='alert-error'>Acceso denegado.</div>";
     exit;
 }
-
 require_once 'config/db.php';
-
 $inventory = [];
-
 try {
+    //Consulta principal. Consulta el inventario, los objetos y las marcas con los joins.
     $sql = "SELECT 
                 inv.inventory_id,
                 inv.stock_quantity,
@@ -32,7 +30,6 @@ try {
 <section class="main-mydata">
     <h1 class="mydata-title">Inventario</h1>
     <h3 class="mydata-subtitle">Gestión de stock por talla y producto</h3>
-
     <div class="table-header-actions">
         <a href="index.php?var=user_profile&view=add_inventory" class="btn-save">
             + Nuevo Stock
@@ -46,7 +43,6 @@ try {
             <a href="index.php?var=user_profile&view=add_inventory" class="btn-details">Añadir Stock Inicial</a>
         </div>
     <?php else: ?>
-        
         <div class="table-responsive">
             <table class="inventory-table">
                 <thead>
@@ -97,6 +93,5 @@ try {
                 </tbody>
             </table>
         </div>
-
     <?php endif; ?>
 </section>

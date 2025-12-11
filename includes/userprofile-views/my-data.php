@@ -1,4 +1,5 @@
 <?php
+//Establecemos las variables actuales con la información del usuario.
 if (isset($_SESSION['user_id'])):
     $name = $_SESSION['name'] ?? '';
     $surname1 = $_SESSION['surname1'] ?? '';
@@ -12,7 +13,7 @@ endif;
     <h1 class="mydata-title">Mis datos</h1>
     <h3 class="mydata-subtitle">Edite la información de su cuenta</h3>
 
-<?php if (isset($_GET['status'])): ?>
+<?php if (isset($_GET['status'])): //Control de errores?>
 
         <?php if ($_GET['status'] === 'success'): ?>
             <div class="alert-success" style="padding: 15px; margin-bottom: 20px; border-radius: 5px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; text-align: center;">

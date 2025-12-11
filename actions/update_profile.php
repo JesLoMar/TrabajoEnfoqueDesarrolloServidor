@@ -1,12 +1,10 @@
 <?php
 session_start();
 $errors = [];
-
 if (!isset($_SESSION['user_id']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: ../index.php?var=login");
     exit;
 }
-
 require '../config/db.php';
 
 try {
@@ -27,7 +25,7 @@ try {
     }
 
     if (empty($errors)) {
-
+        //Si los datos no tienen errores actualizamos los datos del perfil del usuario por los nuevos valores introducidos.
         $sql = "UPDATE user SET name = :name, surname1 = :surname1,
                 surname2 = :surname2, address = :address, city = :city,
                 zip_code = :zip_code WHERE user_id = :id";

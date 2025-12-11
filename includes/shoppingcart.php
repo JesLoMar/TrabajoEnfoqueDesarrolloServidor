@@ -1,6 +1,6 @@
 <?php
 require_once 'config/db.php';
-
+//Variables del carrito y guardamos los objetos.
 $cart_items = $_SESSION['cart'] ?? [];
 $products_details = [];
 $total_price = 0;
@@ -9,6 +9,7 @@ if (!empty($cart_items)) {
     foreach ($cart_items as $key => $qty) {
         list($item_id, $size_id) = explode('_', $key);
 
+        //Recuperación de datos de cada objeto por BD. 
         try {
             $sql = "SELECT i.item_id, i.name, i.price, i.image_url, b.brand_name, s.size_name 
                     FROM items i
@@ -41,16 +42,15 @@ if (!empty($cart_items)) {
 ?>
 
 <link rel="stylesheet" href="assets/css/cart.css">
-
 <main class="cart-container">
     <h1>Tu Carrito de Compra</h1>
-<?php if (isset($_GET['error'])): ?>
-    <div style="background-color: #f8d7da; color: #721c24; padding: 15px; margin-bottom: 20px; border: 1px solid #f5c6cb; border-radius: 5px; text-align: center;">
+<?php if (isset($_GET['error']))://Control de errores ?>
+    <div>
         <?php 
             if ($_GET['error'] === 'checkout_failed') {
-                echo "❌ Error al procesar el pedido. Puede que algún producto se haya quedado sin stock.";
+                echo "Error al procesar el pedido. Puede que algún producto se haya quedado sin stock.";
             } else {
-                echo "❌ Ha ocurrido un error desconocido.";
+                echo "Ha ocurrido un error desconocido.";
             }
         ?>
     </div>
@@ -72,7 +72,7 @@ if (!empty($cart_items)) {
                     <span>Total</span>
                     <span></span> </div>
 
-                <?php foreach ($products_details as $item): ?>
+                <?php foreach ($products_details as $item): //Muestra de los detalles por cada objeto?>
                     <div class="cart-row">
                         <div class="cart-product-info">
                             <img src="<?php echo htmlspecialchars($item['image']); ?>" alt="Foto">

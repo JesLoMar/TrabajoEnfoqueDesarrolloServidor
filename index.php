@@ -5,6 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require 'includes/header.php';
 
+// Controlador de sección main a mostrar según variable
 $section = $_GET['var'] ?? '';
 switch ($section) {
     case 'login':

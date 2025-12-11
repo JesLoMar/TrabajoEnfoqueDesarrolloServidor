@@ -3,25 +3,19 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['rol']) || $_SESSION['rol']
     echo "<div class='alert-error'>Acceso denegado.</div>";
     exit;
 }
-
 require_once 'config/db.php';
-
 $users = [];
-
-try {
+try { //Consulta para traer todos los usuarios con sus datos.
     $sql = "SELECT user_id, username, email, name, surname1, rol FROM user ORDER BY rol ASC, username ASC";
     $stmt = $pdo->query($sql);
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 } catch (PDOException $e) {
     echo "<div class='alert-error'>Error al cargar usuarios.</div>";
 }
 ?>
-
 <section class="main-mydata">
     <h1 class="mydata-title">Gestión de Usuarios</h1>
     <h3 class="mydata-subtitle">Administra los permisos y elimina usuarios</h3>
-
     <?php if (isset($_GET['status'])): ?>
         <?php if ($_GET['status'] === 'success'): ?>
             <div class="alert-success" style="padding: 10px; margin-bottom: 15px; border-radius: 5px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; text-align: center;">
@@ -41,7 +35,6 @@ try {
             </div>
         <?php endif; ?>
     <?php endif; ?>
-
     <div class="table-responsive">
         <table class="inventory-table">
             <thead>
@@ -58,17 +51,13 @@ try {
                 <?php foreach ($users as $user): ?>
                     <tr>
                         <td class="text-mono"><?php echo $user['user_id']; ?></td>
-                        
                         <td style="font-weight: bold;">
                             <?php echo htmlspecialchars($user['username']); ?>
                         </td>
-                        
                         <td><?php echo htmlspecialchars($user['email']); ?></td>
-                        
                         <td>
                             <?php echo htmlspecialchars($user['name'] . ' ' . $user['surname1']); ?>
                         </td>
-
                         <td>
                             <?php if ($user['rol'] == 1): ?>
                                 <span class="badge badge-admin" style="background:green; color:white; padding:2px 6px; border-radius:4px; font-size:0.8em;">ADMIN</span>
@@ -76,10 +65,9 @@ try {
                                 <span class="badge badge-user" style="background:#eee; color:#333; padding:2px 6px; border-radius:4px; font-size:0.8em;">USUARIO</span>
                             <?php endif; ?>
                         </td>
-
                         <td>
                             <div style="display: flex; gap: 10px; align-items: center;">
-                                
+                                <!-- Formulario para permitir el cambio de rol -->
                                 <form action="actions/change_role.php" method="POST" style="display: flex; gap: 5px; align-items: center; margin: 0;">
                                     <input type="hidden" name="target_user_id" value="<?php echo $user['user_id']; ?>">
                                     <select name="new_rol" style="padding: 5px; border-radius: 4px; border: 1px solid #ccc;">
@@ -90,7 +78,6 @@ try {
                                         Guardar
                                     </button>
                                 </form>
-
                                 <?php if ($user['user_id'] != $_SESSION['user_id']): ?>
                                     <form action="actions/delete_user.php" method="POST" onsubmit="return confirm('¿Estás SEGURO de eliminar a este usuario?\n\n¡SE BORRARÁN TODOS SUS PEDIDOS!\nEsta acción es irreversible.');" style="margin: 0;">
                                         <input type="hidden" name="target_user_id" value="<?php echo $user['user_id']; ?>">
@@ -99,7 +86,6 @@ try {
                                         </button>
                                     </form>
                                 <?php endif; ?>
-
                             </div>
                         </td>
                     </tr>

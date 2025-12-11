@@ -1,4 +1,5 @@
 <?php
+// Variables para mostrar en el resumen del perfil, control de botones a través de rol de usuario.
 $username = $_SESSION['username'] ?? '';
 $username = ucfirst($username);
 $email = $_SESSION['email'] ?? '';
@@ -10,6 +11,7 @@ if ($rol == 1) {
 }
 ?>
 <link rel="stylesheet" href="assets/css/admin.css">
+<!-- Control de la ventana de visualización con sistema similar al index -->
 <main class="main-container">
     <div class="frame">
         <div class="avatar-container">
