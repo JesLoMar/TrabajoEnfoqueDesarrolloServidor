@@ -27,6 +27,11 @@ try {
             Artículo actualizado correctamente.
         </div>
     <?php endif; ?>
+    <?php if (isset($_GET['status']) && $_GET['status'] === 'deleted'): ?>
+        <div class="alert-success" style="background:#f8d7da; color:#721c24; border-color:#f5c6cb;">
+            Artículo eliminado correctamente.
+        </div>
+    <?php endif; ?>
     <div class="table-responsive">
         <table class="inventory-table">
             <thead>
@@ -56,10 +61,22 @@ try {
                         <td class="text-mono"><?php echo htmlspecialchars($item['sku']); ?></td>
                         <td><?php echo number_format($item['price'], 2); ?> €</td>
                         <td class="text-center">
-                            <a href="index.php?var=user_profile&view=edit_item&id=<?php echo $item['item_id']; ?>"
-                                class="btn-details">
-                                Modificar
-                            </a>
+                            <div style="display: flex; justify-content: center; gap: 10px;">
+                                <a href="index.php?var=user_profile&view=edit_item&id=<?php echo $item['item_id']; ?>"
+                                    class="btn-details">
+                                    Modificar
+                                </a>
+
+                                <form action="actions/delete_item.php" method="POST"
+                                    onsubmit="return confirm('¿Estás seguro de borrar este producto?\n\nSe eliminará también del stock.\nEsta acción es irreversible.');"
+                                    style="margin: 5;">
+                                    <input type="hidden" name="item_id" value="<?php echo $item['item_id']; ?>">
+                                    <button type="submit" class="btn-details"
+                                        style="border-color: #dc3545; color: #dc3545;">
+                                        Eliminar
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 <?php endforeach; ?>
