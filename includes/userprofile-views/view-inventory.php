@@ -29,19 +29,21 @@ try {
     echo "<div class='alert-error'>Error al cargar el inventario: " . $e->getMessage() . "</div>";
 }
 ?>
-<section>
+<section class="main-mydata">
     <h1 class="mydata-title">Inventario</h1>
     <h3 class="mydata-subtitle">Gestión de stock por talla y producto</h3>
 
     <div class="table-header-actions">
-        <a href="index.php?var=user_profile&view=add_inventory" class="btn-save btn-sm">
-            + Nuevo Producto
+        <a href="index.php?var=user_profile&view=add_inventory" class="btn-save">
+            + Nuevo Stock
         </a>
     </div>
 
     <?php if (empty($inventory)): ?>
         <div class="empty-state">
             <p>No hay stock registrado en el inventario.</p>
+            <br>
+            <a href="index.php?var=user_profile&view=add_inventory" class="btn-details">Añadir Stock Inicial</a>
         </div>
     <?php else: ?>
         
@@ -53,32 +55,30 @@ try {
                         <th>SKU</th>
                         <th>Marca</th>
                         <th>Género</th>
-                        <th>Talla</th>
+                        <th class="text-center">Talla</th>
                         <th class="text-center">Stock</th>
-                        <th class="text-center">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($inventory as $row): ?>
                         <tr>
-                            <td class="text-mono">
+                            <td class="fw-bold">
                                 <?php echo htmlspecialchars($row['item_name']); ?>
                             </td>
 
-                            <td class="fw-bold">
+                            <td class="text-mono text-muted">
                                 <?php echo htmlspecialchars($row['sku']); ?>
                             </td>
 
                             <td>
                                 <?php echo htmlspecialchars($row['brand_name']); ?>
-                                <span class="text-muted">(ID: <?php echo $row['brand_id']; ?>)</span>
                             </td>
 
                             <td>
                                 <?php echo htmlspecialchars($row['gender']); ?>
                             </td>
 
-                            <td>
+                            <td class="text-center">
                                 <span class="badge badge-size">
                                     <?php echo htmlspecialchars($row['size_name']); ?>
                                 </span>
@@ -89,14 +89,8 @@ try {
                                     $stockClass = ($row['stock_quantity'] < 5) ? 'stock-low' : 'stock-ok'; 
                                 ?>
                                 <span class="<?php echo $stockClass; ?>">
-                                    <?php echo $row['stock_quantity']; ?>
+                                    <?php echo $row['stock_quantity']; ?> uds.
                                 </span>
-                            </td>
-
-                            <td class="text-center">
-                                <a href="#" class="btn-details" title="Editar Stock">
-                                    Editar
-                                </a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

@@ -105,6 +105,4 @@ try {
 
     $pdo->rollBack();
     die("ERROR DETECTADO: " . $e->getMessage());
-/*    header("Location: ../index.php?var=shopping_cart&error=checkout_failed");
-    exit;*/
 }

@@ -14,18 +14,18 @@ try {
     $stmt = $pdo->query($sql);
     $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    echo "Error al cargar artículos.";
+    echo "<div class='alert-error'>Error al cargar artículos.</div>";
 }
 ?>
 
 <section class="main-mydata">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-        <h1 class="mydata-title">Gestión de Artículos</h1>
-        <a href="index.php?var=user_profile&view=items" class="btn-save" style="padding: 5px 15px; text-decoration: none; font-size: 0.9em;">+ Añadir Nuevo</a>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
+        <h1 class="mydata-title" style="margin-bottom: 0; border: none;">Gestión de Artículos</h1>
+        <a href="index.php?var=user_profile&view=items" class="btn-save">+ Añadir Nuevo</a>
     </div>
 
     <?php if (isset($_GET['status']) && $_GET['status'] === 'updated'): ?>
-        <div class="alert-success" style="padding:10px; background:#d4edda; color:#155724; margin-bottom:15px; text-align:center;">
+        <div class="alert-success">
             Artículo actualizado correctamente.
         </div>
     <?php endif; ?>
@@ -40,25 +40,27 @@ try {
                     <th>Marca</th>
                     <th>SKU</th>
                     <th>Precio</th>
-                    <th>Acción</th>
+                    <th class="text-center">Acción</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($items as $item): ?>
                     <tr>
-                        <td class="text-mono"><?php echo $item['item_id']; ?></td>
+                        <td class="text-mono">#<?php echo $item['item_id']; ?></td>
                         <td>
                             <?php if ($item['image_url']): ?>
-                                <img src="<?php echo htmlspecialchars($item['image_url']); ?>" style="width:40px; height:40px; object-fit:cover;">
+                                <img src="<?php echo htmlspecialchars($item['image_url']); ?>" class="img-thumbnail-sm">
+                            <?php else: ?>
+                                <span class="text-muted">-</span>
                             <?php endif; ?>
                         </td>
-                        <td style="font-weight:bold;"><?php echo htmlspecialchars($item['name']); ?></td>
+                        <td class="fw-bold"><?php echo htmlspecialchars($item['name']); ?></td>
                         <td><?php echo htmlspecialchars($item['brand_name']); ?></td>
                         <td class="text-mono"><?php echo htmlspecialchars($item['sku']); ?></td>
                         <td><?php echo number_format($item['price'], 2); ?> €</td>
-                        <td>
+                        <td class="text-center">
                             <a href="index.php?var=user_profile&view=edit_item&id=<?php echo $item['item_id']; ?>"
-                                class="btn-details" style="text-decoration:none; color:blue;">
+                                class="btn-details">
                                 Modificar
                             </a>
                         </td>

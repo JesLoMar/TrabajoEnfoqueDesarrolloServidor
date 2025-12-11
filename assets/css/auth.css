@@ -1,0 +1,241 @@
+/* =========================================
+   1. CONFIGURACIÓN BASE Y VARIABLES
+   ========================================= */
+:root {
+    --primary: #1a1a1a;
+    /* Negro elegante */
+    --accent: #007bff;
+    /* Azul acción */
+    --bg-body: #f4f6f9;
+    /* Fondo gris claro */
+    --bg-white: #ffffff;
+    --text-main: #333333;
+    --border-color: #e9ecef;
+    --danger: #dc3545;
+    --shadow-card: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+/* Centrado vertical y horizontal de la página */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh;
+    /* Ocupa casi toda la altura */
+    padding: 20px;
+    background-color: var(--bg-body);
+}
+
+/* =========================================
+   2. TARJETA DEL FORMULARIO (.auth-card)
+   ========================================= */
+/* IMPORTANTE: Añadiremos esta clase en el HTML más abajo */
+.auth-card {
+    background-color: var(--bg-white);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-card);
+    width: 100%;
+    max-width: 480px;
+    /* Ancho elegante, no muy ancho */
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.auth-card h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: var(--primary);
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+/* =========================================
+   3. INPUTS Y LABELS
+   ========================================= */
+.form-row {
+    margin-bottom: 20px;
+    text-align: left;
+    /* Las etiquetas se leen mejor a la izquierda */
+}
+
+.form-row label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.form-row input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #fafafa;
+    box-sizing: border-box;
+    /* Vital para que el padding no rompa el ancho */
+}
+
+.form-row input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.05);
+}
+
+/* =========================================
+   4. BOTÓN DE ACCIÓN (.enviarform)
+   ========================================= */
+.enviarform {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+    margin-top: 10px;
+}
+
+.enviarform:hover {
+    background-color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================================
+   5. ENLACES Y EXTRAS
+   ========================================= */
+.create-account-access,
+.login-access {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.create-account-access a,
+.login-access a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.create-account-access a:hover,
+.login-access a:hover {
+    text-decoration: underline;
+}
+
+/* Alertas de error (PHP) */
+.alert {
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.alert-danger {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+}
+
+.alert p {
+    margin: 0;
+}
+/* auth.css - Estilos específicos para Login/Registro */
+
+/* Contenedor principal centrado */
+.auth-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* Ocupa casi toda la pantalla */
+    padding: 20px;
+    background-color: var(--bg-light);
+}
+
+/* Tarjeta de autenticación */
+.auth-card {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 450px; /* Ancho estándar para login */
+}
+
+/* Modificador para registro (más ancho) */
+.auth-card.wide {
+    max-width: 700px;
+}
+
+.auth-card h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--primary);
+}
+
+/* Grid para formularios complejos (Registro) */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-full {
+    grid-column: span 2;
+}
+
+/* Inputs y Labels */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-main);
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+/* Links de pie de form */
+.auth-links {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.auth-links a {
+    color: var(--accent);
+    font-weight: bold;
+}
+
+/* Responsive móvil */
+@media (max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .form-full { grid-column: span 1; }
+}

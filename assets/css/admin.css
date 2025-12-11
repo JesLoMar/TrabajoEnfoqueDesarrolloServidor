@@ -1,0 +1,365 @@
+/* =========================================
+   1. VARIABLES Y CONFIGURACIÓN BASE
+   ========================================= */
+:root {
+    --primary: #1a1a1a;
+    /* Negro elegante */
+    --accent: #007bff;
+    /* Azul acción */
+    --bg-sidebar: #2c2c2c;
+    /* Gris oscuro sidebar */
+    --bg-body: #f4f6f9;
+    /* Gris muy claro fondo */
+    --bg-white: #ffffff;
+    --text-main: #333333;
+    --text-light: #f8f9fa;
+    --border-color: #e9ecef;
+    --danger: #dc3545;
+    --shadow-card: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+body {
+    background-color: var(--bg-body);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+}
+
+/* =========================================
+   2. LAYOUT PRINCIPAL (GRID)
+   ========================================= */
+.main-container {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    /* Sidebar fija | Contenido flexible */
+    min-height: calc(100vh - 80px);
+    /* Ajuste según altura de tu header */
+    width: 100%;
+}
+
+/* =========================================
+   3. SIDEBAR (IZQUIERDA)
+   ========================================= */
+.frame {
+    background-color: var(--bg-sidebar);
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+    gap: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Avatar del usuario */
+.avatar-container {
+    width: 100px;
+    height: 100px;
+    background-color: #4a4a4a;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+.avatar-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+.welcome-text {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #ccc;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 20px;
+}
+
+/* Menú de navegación */
+.menu-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.menu-btn {
+    width: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.menu-btn a {
+    display: block;
+    padding: 12px 15px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid transparent;
+    transition: all 0.3s;
+}
+
+.menu-btn a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding-left: 20px;
+    /* Efecto deslizamiento */
+    border-left-color: var(--accent);
+}
+
+/* Botón Cerrar Sesión específico */
+.menu-btn.logout {
+    margin-top: auto;
+    /* Empuja el botón al fondo */
+    border: 1px solid var(--danger);
+}
+
+.menu-btn.logout a {
+    background-color: transparent;
+    color: #ff6b6b;
+    text-align: center;
+}
+
+.menu-btn.logout a:hover {
+    background-color: var(--danger);
+    color: white;
+    padding-left: 15px;
+    /* Quitar efecto slide en logout */
+    border-left-color: transparent;
+}
+
+/* =========================================
+   4. ÁREA DE CONTENIDO (DERECHA)
+   ========================================= */
+.section-content {
+    background-color: var(--bg-body);
+    padding: 40px;
+    overflow-y: auto;
+    /* Scroll solo en el contenido si es muy largo */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* Alinear arriba, no al centro vertical */
+}
+
+/* Contenedor tipo Tarjeta (Para My Data, Forms, etc) */
+.main-mydata,
+.add-item-form {
+    background-color: var(--bg-white);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-card);
+    width: 100%;
+    max-width: 900px;
+    /* Ancho máximo para que no se estire demasiado */
+    margin: 0 auto;
+}
+
+/* Títulos */
+.mydata-title {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin: 0 0 10px 0;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.mydata-subtitle {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* =========================================
+   5. FORMULARIOS E INPUTS
+   ========================================= */
+.form-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.form-row label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #444;
+    font-size: 0.9rem;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #fff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    width: 100%;
+    /* Asegurar que ocupen el ancho */
+    box-sizing: border-box;
+}
+
+.form-row input:focus,
+.form-row select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Botones de Acción */
+.btn-save,
+.enviarform {
+    background-color: var(--primary);
+    color: white;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-save:hover,
+.enviarform:hover {
+    background-color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================================
+   6. TABLAS (GESTIÓN)
+   ========================================= */
+.table-responsive {
+    overflow-x: auto;
+    border-radius: 8px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-color);
+    background: white;
+}
+
+.inventory-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+    /* Evita que se rompa en móvil */
+}
+
+.inventory-table th {
+    background-color: var(--primary);
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.inventory-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+    color: var(--text-main);
+}
+
+.inventory-table tr:nth-child(even) {
+    background-color: #fcfcfc;
+}
+
+.inventory-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Botón pequeño dentro de tablas */
+.btn-details {
+    padding: 6px 12px;
+    background-color: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-details:hover {
+    background-color: var(--accent);
+    color: white;
+}
+
+/* =========================================
+   7. RESPONSIVE (MÓVIL)
+   ========================================= */
+@media (max-width: 768px) {
+    .main-container {
+        grid-template-columns: 1fr;
+        /* Una sola columna */
+        display: block;
+    }
+
+    .frame {
+        flex-direction: row;
+        /* Sidebar horizontal arriba */
+        align-items: center;
+        overflow-x: auto;
+        /* Scroll si hay muchos botones */
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .avatar-container {
+        width: 50px;
+        height: 50px;
+        margin: 0;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        flex-shrink: 0;
+    }
+
+    .welcome-text {
+        display: none;
+        /* Ocultar bienvenida en móvil para ahorrar espacio */
+    }
+
+    .menu-options {
+        flex-direction: row;
+        width: auto;
+    }
+
+    .menu-btn a {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+
+    .section-content {
+        padding: 20px 10px;
+    }
+
+    .main-mydata,
+    .add-item-form {
+        padding: 20px;
+    }
+}
+/* Separadores en Sidebar */
+.sidebar-divider {
+    border: 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin: 15px 0;
+}
+
+.sidebar-label {
+    color: #888;
+    font-size: 0.75rem;
+    padding-left: 10px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}

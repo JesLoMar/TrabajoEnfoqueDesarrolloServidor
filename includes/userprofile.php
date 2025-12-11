@@ -1,15 +1,23 @@
 <?php
 $username = $_SESSION['username'] ?? '';
 $username = ucfirst($username);
+$email = $_SESSION['email'] ?? '';
+$rol = $_SESSION['rol'] ?? '';
+if ($rol == 1) {
+    $rol = 'Administrador';
+} else {
+    $rol = 'Usuario';
+}
 ?>
+<link rel="stylesheet" href="assets/css/admin.css">
 <main class="main-container">
-    <link rel="stylesheet" href="assets/css/userprofile.css">
     <div class="frame">
-
         <div class="avatar-container">
             <img src="assets/img/icon.png" alt="Icono Web">
         </div>
-        <p class="welcome-text">Bienvenido/a, <?php echo htmlspecialchars($username); ?>.</p>
+        <p class="welcome-text">USUARIO: <?php echo htmlspecialchars($username); ?></p>
+        <p class="welcome-text">CORREO: <?php echo htmlspecialchars($email); ?></p>
+        <p class="welcome-text">ROL: <?php echo htmlspecialchars($rol); ?></p>
 
         <div class="menu-options">
             <section class="user-view">
@@ -17,7 +25,7 @@ $username = ucfirst($username);
                     <a href="index.php?var=user_profile&view=my_data">Mis datos</a>
                 </div>
                 <div class="menu-btn orders">
-                    <a href="index.php?var=user_profile&view=orders">Pedidos</a>
+                    <a href="index.php?var=user_profile&view=orders">Mis pedidos</a>
                 </div>
             </section>
             <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1): ?>
@@ -26,13 +34,13 @@ $username = ucfirst($username);
                         <a href="index.php?var=user_profile&view=users">Administrar usuarios</a>
                     </div>
                     <div class="menu-btn add-items">
-                        <a href="index.php?var=user_profile&view=items">Añadir Objetos</a>
+                        <a href="index.php?var=user_profile&view=items">Añadir objetos</a>
                     </div>
                     <div class="menu-btn orders-view">
-                        <a href="index.php?var=user_profile&view=admin_orders">Ver pedidos</a>
+                        <a href="index.php?var=user_profile&view=admin_orders">Pedidos</a>
                     </div>
                     <div class="menu-btn inventory-view">
-                        <a href="index.php?var=user_profile&view=inventory">Ver inventario</a>
+                        <a href="index.php?var=user_profile&view=inventory">Organizar inventario</a>
                     </div>
                 </section>
             <?php endif; ?>
@@ -60,8 +68,8 @@ $username = ucfirst($username);
             case 'users':
                 include 'includes/userprofile-views/admin-users.php';
                 break;
-            case 'admin_orders':
-                include 'includes/userprofile-views/view-orders.php';
+            case 'items':
+                include 'includes/userprofile-views/add-items.php';
                 break;
             case 'manage_items':
                 include 'includes/userprofile-views/manage-items.php';
@@ -75,8 +83,8 @@ $username = ucfirst($username);
             case 'add_inventory';
                 include 'includes/userprofile-views/add-inventory.php';
                 break;
-            case 'items':
-                include 'includes/userprofile-views/add-items.php';
+            case 'admin_orders':
+                include 'includes/userprofile-views/view-orders.php';
                 break;
             default:
                 break;
