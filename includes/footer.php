@@ -41,7 +41,7 @@
             <p>Suscríbete para recibir ofertas exclusivas.</p>
             <form class="newsletter-form">
                 <input type="email" placeholder="Tu email aquí..." required>
-                <button type="submit"><img src="assets/img/send.png" /></button>
+                <button type="submit"><img class="boton-formulario" src="assets/img/send.png" /></button>
             </form>
         </div>
     </div>

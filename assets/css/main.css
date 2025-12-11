@@ -2,38 +2,31 @@
    1. VARIABLES Y CONFIGURACIÓN BASE
    ========================================= */
 :root {
-    /* Paleta de Colores */
-    --primary: #1a1a1a;       /* Negro principal */
-    --primary-hover: #000000; /* Negro absoluto para hover */
-    --secondary: #1a1000;     /* Marrón muy oscuro (usado en nav/footer) */
-    --accent: #e74c3c;        /* Rojo acción */
-    --accent-hover: #c0392b;  /* Rojo oscuro */
-    --success: #27ae60;       /* Verde éxito */
-    
-    /* Fondos y Textos */
+    --primary: #1a1a1a;
+    --primary-hover: #000000;
+    --secondary: #1a1000;
+    --accent: #e74c3c;
+    --accent-hover: #c0392b;
+    --success: #27ae60;
+    --danger: #dc3545;
     --bg-body: #ffffff;
     --bg-light: #f9f9f9;
     --text-main: #333333;
     --text-muted: #707070;
     --border: #e1e1e1;
-
-    /* Estilos Genéricos */
     --radius: 6px;
     --shadow-sm: 0 4px 6px rgba(0,0,0,0.05);
     --shadow-md: 0 10px 20px rgba(0,0,0,0.1);
     --transition: all 0.3s ease;
 }
-
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
 body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; }
 a { text-decoration: none; color: inherit; transition: var(--transition); }
 ul { list-style: none; }
 img { max-width: 100%; display: block; }
-
 /* =========================================
-   2. COMPONENTES GLOBALES (Botones y Inputs)
+   2. COMPONENTES GLOBALES
    ========================================= */
-/* Botones */
 .btn {
     display: inline-block;
     padding: 12px 25px;
@@ -46,21 +39,15 @@ img { max-width: 100%; display: block; }
     transition: var(--transition);
     font-size: 0.9rem;
 }
-
 .btn-primary { background-color: var(--primary); color: white; }
 .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
-
 .btn-accent { background-color: var(--accent); color: white; }
 .btn-accent:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
-
 .btn-outline { background-color: transparent; border: 2px solid var(--primary); color: var(--primary); }
 .btn-outline:hover { background-color: var(--primary); color: white; }
-
 .btn-full { width: 100%; }
 .btn:disabled { background-color: #ccc; cursor: not-allowed; transform: none; }
-
-/* Inputs Globales */
-input[type="text"], input[type="email"], input[type="number"], select, textarea {
+input[type="text"], input[type="email"], input[type="number"], input[type="password"], select, textarea {
     padding: 12px;
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -70,72 +57,68 @@ input[type="text"], input[type="email"], input[type="number"], select, textarea 
     transition: border-color 0.3s;
 }
 input:focus, select:focus { border-color: var(--primary); }
-
+.alert {
+    padding: 15px;
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 500;
+}
+.alert-danger { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+.alert-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
 /* =========================================
-   3. HEADER Y NAVEGACIÓN (CORREGIDO)
+   3. HEADER Y NAVEGACIÓN
    ========================================= */
-
-/* --- 1. CONTENEDOR PRINCIPAL DEL HEADER --- */
 header {
-    background-color: #ffffff; /* Fondo blanco para la cabecera */
+    background-color: #ffffff;
     padding: 15px 0;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     position: relative;
     z-index: 1001;
 }
-
 #header-ul {
     display: flex;
-    justify-content: space-between; /* Iconos a los lados, logo al centro */
+    justify-content: space-between;
     align-items: center;
     list-style: none;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
-
-/* --- 2. ESTILO DE LOS BOTONES (Usuario y Carrito) --- */
+/* Botones redondos para iconos */
 #header-ul li a {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--primary); /* Fondo OSCURO (negro/gris) */
-    width: 80px;  /* Ancho fijo más grande */
-    height: 80px; /* Alto fijo más grande */
-    border-radius: 50%; /* Los hace redondos */
+    background-color: var(--primary);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-
 #header-ul li a:hover {
-    background-color: var(--accent); /* Cambia a rojo al pasar el ratón */
-    transform: translateY(-1px); /* Pequeño salto hacia arriba */
+    background-color: var(--accent);
+    transform: translateY(-2px);
 }
-
-/* Ajuste de las imágenes dentro de los botones */
 #header-ul li a img {
     height: 40px;
     width: auto;
     display: block;
 }
-
-/* --- 3. ESTILO DEL LOGO CENTRAL --- */
 #header-ul li img#logo {
-    height: 160px;
+    height: 120px;
     width: auto;
     display: block;
     margin: 0 20px;
 }
-
-/* --- 4. BARRA DE NAVEGACIÓN (NAVBAR) --- */
 .navbar {
-    background-color: var(--secondary); /* Fondo oscuro */
+    background-color: var(--secondary);
     position: sticky;
     top: 0;
     z-index: 1000;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-
 .nav-links {
     display: flex;
     justify-content: center;
@@ -143,9 +126,7 @@ header {
     margin: 0;
     padding: 0;
 }
-
 .nav-links > li { position: relative; }
-
 .nav-links > li > a {
     display: block;
     padding: 15px 25px;
@@ -156,13 +137,10 @@ header {
     text-transform: uppercase;
     transition: background 0.3s;
 }
-
 .nav-links > li > a:hover {
     background-color: rgba(255,255,255,0.1);
     color: var(--accent);
 }
-
-/* --- 5. DROPDOWNS (Menús desplegables) --- */
 .dropdown-content {
     display: none;
     position: absolute;
@@ -174,25 +152,20 @@ header {
     z-index: 2000;
     border-radius: 0 0 6px 6px;
 }
-
 .dropdown:hover .dropdown-content { display: block; }
-
 .dropdown-content a {
-    color: #333 !important; /* Texto oscuro */
-    padding: 3px 8px;
+    color: #333 !important;
+    padding: 12px 20px;
     text-transform: none;
     border-bottom: 1px solid #eee;
 }
-
 .dropdown-content a:hover {
     background-color: #f5f5f5;
     color: var(--accent) !important;
     padding-left: 25px;
 }
-
-/* --- RESPONSIVE --- */
+/* Mobile Toggle */
 .nav-toggle, .nav-toggle-label { display: none; }
-
 @media (max-width: 900px) {
     .nav-toggle-label { 
         display: block; cursor: pointer; padding: 15px; position: absolute; right: 20px; top: 0; 
@@ -203,18 +176,15 @@ header {
     .nav-toggle-label span { top: 22px; }
     .nav-toggle-label span::before { content: ''; top: -8px; }
     .nav-toggle-label span::after { content: ''; top: 8px; }
-
     .nav-links {
         display: none; flex-direction: column; width: 100%; background-color: var(--secondary);
     }
     #nav-toggle:checked ~ .nav-links { display: flex; }
-    
     .nav-links > li > a { text-align: left; padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .dropdown:hover .dropdown-content { display: none; } /* Desactivar hover en móvil simple */
+    .dropdown:hover .dropdown-content { display: none; }
 }
-
 /* =========================================
-   4. LAYOUT PRINCIPAL Y GRID
+   4. LAYOUT Y COMPONENTES VISUALES
    ========================================= */
 main {
     padding: 40px 20px;
@@ -222,7 +192,6 @@ main {
     margin: 0 auto;
     min-height: 80vh;
 }
-
 .section-title {
     text-align: center;
     font-size: 2.2rem;
@@ -232,18 +201,28 @@ main {
     display: inline-block;
     width: 100%;
 }
-
-/* Grid de Productos */
+.shop-hero {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: var(--bg-light);
+    margin-bottom: 30px;
+}
+.shop-hero h1 { margin-bottom: 10px; color: var(--primary); }
+.shop-hero p { color: var(--text-muted); margin-bottom: 20px; }
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px;
+    background-color: var(--bg-light);
+    border-radius: var(--radius);
+    color: var(--text-muted);
+}
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsive automático */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
     padding-bottom: 40px;
 }
-
-/* =========================================
-   5. TARJETAS DE PRODUCTO (Card)
-   ========================================= */
 .product-card {
     background: white;
     border-radius: 12px;
@@ -254,30 +233,24 @@ main {
     flex-direction: column;
     border: 1px solid transparent;
 }
-
 .product-card:hover {
     transform: translateY(-8px);
     box-shadow: var(--shadow-md);
     border-color: #eee;
 }
-
 .card-image-container {
     height: 320px;
     background-color: #f4f4f4;
     overflow: hidden;
     position: relative;
 }
-
 .card-image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
 }
-
 .product-card:hover .card-image-container img { transform: scale(1.08); }
-
-/* Etiquetas (Nuevo/Oferta) */
 .tag {
     position: absolute;
     top: 15px; left: 15px;
@@ -291,9 +264,7 @@ main {
 }
 .tag.offer { background-color: var(--accent); }
 .tag.new { background-color: var(--success); }
-
 .card-details { padding: 20px; }
-
 .card-brand {
     color: var(--text-muted);
     font-size: 0.8rem;
@@ -301,7 +272,6 @@ main {
     text-transform: uppercase;
     letter-spacing: 1px;
 }
-
 .card-title {
     color: var(--text-main);
     font-size: 1.1rem;
@@ -311,15 +281,13 @@ main {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
 .card-price {
     color: var(--primary);
     font-size: 1.3rem;
     font-weight: 800;
 }
-
 /* =========================================
-   6. PÁGINA DETALLE DE PRODUCTO
+   5. DETALLE PRODUCTO
    ========================================= */
 .product-container {
     display: flex;
@@ -328,48 +296,33 @@ main {
     background: white;
     padding: 20px;
 }
-
 .product-gallery { flex: 1.2; }
 .main-image {
     border-radius: 10px;
     box-shadow: var(--shadow-sm);
     width: 100%;
-    aspect-ratio: 1/1; /* Cuadrado perfecto */
+    aspect-ratio: 1/1;
     object-fit: cover;
 }
-
 .product-details { flex: 1; display: flex; flex-direction: column; gap: 20px; }
-
 .product-title { font-size: 2.5rem; line-height: 1.1; margin: 0; }
 .product-price { font-size: 2rem; color: var(--primary); font-weight: 700; }
-.product-price .old { text-decoration: line-through; color: #999; font-size: 1.2rem; font-weight: 400; margin-right: 10px; }
-
+.product-price .old { text-decoration: line-through; color: #999; font-size: 1.2rem; margin-right: 10px; }
 .sku { font-family: monospace; color: #999; }
 .stock-status { font-weight: bold; color: var(--success); }
 .stock-status.out { color: var(--accent); }
-
-/* Selectores de Talla */
 .label-row { display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; }
 .btn-size-guide { background: none; border: none; text-decoration: underline; color: var(--text-muted); cursor: pointer; }
-
-/* Responsive Detalle */
 @media (max-width: 900px) {
     .product-container { flex-direction: column; }
     .main-image { aspect-ratio: auto; max-height: 400px; }
 }
-
 /* =========================================
-   7. CARRITO DE COMPRAS
+   6. CARRITO
    ========================================= */
-.cart-layout {
-    display: flex;
-    gap: 40px;
-    margin-top: 20px;
-}
-
+.cart-layout { display: flex; gap: 40px; margin-top: 20px; }
 .cart-items { flex: 2; }
 .cart-summary { flex: 1; height: fit-content; background: var(--bg-light); padding: 30px; border-radius: 12px; }
-
 .cart-header {
     display: grid;
     grid-template-columns: 3fr 1fr 1fr 1fr 0.5fr;
@@ -379,7 +332,6 @@ main {
     color: var(--text-muted);
     font-size: 0.9rem;
 }
-
 .cart-row {
     display: grid;
     grid-template-columns: 3fr 1fr 1fr 1fr 0.5fr;
@@ -387,26 +339,21 @@ main {
     padding: 20px 0;
     border-bottom: 1px solid var(--border);
 }
-
 .cart-product-info { display: flex; align-items: center; gap: 20px; }
 .cart-product-info img { width: 70px; height: 70px; object-fit: cover; border-radius: 6px; }
-
 .qty-input { width: 60px; text-align: center; }
 .btn-remove { color: var(--text-muted); transition: 0.3s; }
 .btn-remove:hover { color: var(--accent); }
-
 .summary-row { display: flex; justify-content: space-between; margin-bottom: 15px; }
 .summary-row.total { font-size: 1.4rem; font-weight: 800; color: var(--primary); border-top: 2px solid #ddd; padding-top: 20px; }
-
 @media (max-width: 768px) {
     .cart-layout { flex-direction: column; }
     .cart-header { display: none; }
     .cart-row { display: flex; flex-direction: column; gap: 15px; text-align: center; background: #fff; padding: 20px; border-radius: 8px; box-shadow: var(--shadow-sm); margin-bottom: 20px; border: none; }
     .cart-product-info { flex-direction: column; }
 }
-
 /* =========================================
-   8. FOOTER
+   7. FOOTER
    ========================================= */
 .site-footer {
     background-color: var(--secondary);
@@ -414,7 +361,6 @@ main {
     padding-top: 60px;
     margin-top: 80px;
 }
-
 .footer-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -424,19 +370,26 @@ main {
     gap: 40px;
     justify-content: space-between;
 }
-
 .footer-col { flex: 1; min-width: 200px; }
 .footer-col h3 { color: white; margin-bottom: 25px; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
-
 .footer-col ul li { margin-bottom: 12px; }
 .footer-col a:hover { color: white; padding-left: 5px; }
-
-/* Newsletter Form Footer */
 .newsletter-form { display: flex; }
 .newsletter-form input { border-radius: 4px 0 0 4px; border: none; }
 .newsletter-form button { border-radius: 0 4px 4px 0; background-color: var(--accent); border: none; color: white; cursor: pointer; padding: 0 15px; transition: 0.3s; }
 .newsletter-form button:hover { background-color: var(--accent-hover); }
-
+.social-links { display: flex; gap: 15px; margin-top: 15px; }
+.social-links a { display: inline-block; transition: transform 0.3s ease; }
+.social-links a:hover { transform: scale(1.2); }
+.social-links img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    display: block;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+.social-links img:hover { opacity: 1; }
 .footer-bottom {
     background-color: #0f0900;
     text-align: center;
@@ -446,77 +399,24 @@ main {
     color: #666;
 }
 
-.social-links {
-    display: flex;
-    gap: 15px; /* Separación entre iconos */
-    margin-top: 15px;
-}
-
-.social-links a {
-    display: inline-block;
-    transition: transform 0.3s ease;
-}
-
-.social-links a:hover {
-    transform: scale(1.2); /* Pequeño zoom al pasar el ratón */
-}
-
-/* AQUÍ ESTÁ LA SOLUCIÓN AL TAMAÑO GIGANTE */
-.social-links img {
-    width: 50px;  /* Ancho fijo pequeño */
-    height: 50px; /* Alto fijo cuadrado */
-    object-fit: contain; /* Asegura que el icono no se deforme */
-    display: block;
-    transition: opacity 0.3s;
-}
-
-.social-links img:hover {
-    opacity: 1; /* Al pasar el ratón se vuelven totalmente blancos */
-}
-
 /* =========================================
-   9. UTILIDADES Y MODALES
+   8. MODALES
    ========================================= */
-/* Modal Guía Tallas */
 .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(2px); }
 .modal-content { background-color: white; margin: 5% auto; padding: 40px; border-radius: 8px; width: 90%; max-width: 700px; position: relative; box-shadow: var(--shadow-md); }
 .close-modal { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #999; }
 .close-modal:hover { color: var(--primary); }
-
 .size-guide-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
 .size-guide-table th { background: #f4f4f4; font-weight: 700; padding: 12px; }
 .size-guide-table td { border: 1px solid #eee; padding: 12px; text-align: center; }
-
-/* --- EXTRAS PARA GENERAL-DISPLAY Y SHOPPINGCART --- */
-
-/* Hero de la tienda (Título y subtítulo) */
-.shop-hero {
-    text-align: center;
-    padding: 40px 20px;
-    background-color: var(--bg-light);
-    margin-bottom: 30px;
+/* PARCHES*/
+.boton-formulario {
+    width: 50px;
+    height: auto;
+    padding: 3px 0px 3px 0px;
 }
-
-.shop-hero h1 { margin-bottom: 10px; color: var(--primary); }
-.shop-hero p { color: var(--text-muted); margin-bottom: 20px; }
-
-/* Mensajes de Alerta (Errores/Éxito) */
-.alert {
-    padding: 15px;
-    border-radius: var(--radius);
-    margin-bottom: 20px;
-    text-align: center;
-    font-weight: 500;
-}
-.alert-danger { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
-.alert-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-
-/* Estado vacío */
-.empty-state {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 60px;
-    background-color: var(--bg-light);
-    border-radius: var(--radius);
-    color: var(--text-muted);
+.logo-header {
+    width: 180px;
+    height: auto;
+    padding: 4px;
 }

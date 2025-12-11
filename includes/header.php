@@ -15,20 +15,16 @@
 <body>
     <header>
         <ul id="header-ul">
-            <li><a href="index.php?var=login"><img src="assets/img/user.png" alt="Login" /></a></li>
-            
-            <li><img src="assets/img/icon.png" id="logo" alt="Zapatos Zapatez" /></li>
-            
-            <li><a href="index.php?var=shopping_cart"><img src="assets/img/shopping-cart.png" alt="Carrito" /></a></li>
+            <li><a href="index.php?var=login"><img class="logo-header" src="assets/img/user.png" alt="Login"/></a></li>
+            <li><img src="assets/img/icon.png" id="logo" alt="Zapatos Zapatez"/></li>
+            <li><a href="index.php?var=shopping_cart"><img class="logo-header" src="assets/img/shopping-cart.png" alt="Carrito"/></a></li>
         </ul>
     </header>
-    
     <nav class="navbar">
         <input type="checkbox" id="nav-toggle" class="nav-toggle">
         <label for="nav-toggle" class="nav-toggle-label">
             <span></span>
         </label>
-
         <ul class="nav-links">
             <li><a href="index.php">Home</a></li>
             
@@ -44,7 +40,6 @@
                     <li><a href="index.php?brand=Christian">Christian Louboutin</a></li>
                 </ul>
             </li>
-
             <li class="dropdown">
                 <a href="#">Diseño de autor <i class="fa fa-caret-down"></i></a>
                 <ul class="dropdown-content">
@@ -54,7 +49,6 @@
                     <li><a href="index.php?brand=Common Projects">Common Projects</a></li>
                 </ul>
             </li>
-
             <li class="dropdown">
                 <a href="#">Ediciones limitadas <i class="fa fa-caret-down"></i></a>
                 <ul class="dropdown-content">
@@ -64,7 +58,6 @@
                     <li><a href="index.php?brand=Nike x Sacai">Nike x Sacai</a></li>
                 </ul>
             </li>
-
             <li><a href="#">Sobre nosotros</a></li>
         </ul>
     </nav>
