@@ -56,7 +56,7 @@ if (!empty($cart_items)) {
     </div>
 <?php endif; ?>
     <?php if (empty($products_details)): ?>
-        <div class="empty-cart">
+        <div class="empty-state">
             <p>Tu carrito está vacío.</p>
             <a href="index.php" class="btn-continue">Volver a la tienda</a>
         </div>

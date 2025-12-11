@@ -96,7 +96,7 @@ require 'includes/header.php';
                 </div>
             </div>
 
-            <button type="submit" class="btn-add-cart" <?php echo empty($available_sizes) ? 'disabled' : ''; ?>>
+            <button type="submit" class="btn btn-primary btn-full" <?php echo empty($available_sizes) ? 'disabled' : ''; ?>>
                 Añadir al Carrito
             </button>
         </form>

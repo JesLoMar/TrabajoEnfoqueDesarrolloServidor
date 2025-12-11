@@ -4,8 +4,8 @@
     </div>
 <?php endif; ?>
 <link rel="stylesheet" href="assets/css/auth.css">
-<main class="userForm">
-    <div class="auth-card" style="max-width: 600px;">
+<main class="auth-main">
+    <div class="auth-card">
         <?php if (!empty($errors)): ?>
         <?php endif; ?>
         <h2>Crear nueva cuenta</h2>
@@ -70,7 +70,7 @@
                     value="<?php echo isset($data['zip_code']) ? htmlspecialchars($data['zip_code']) : ''; ?>">
             </div>
 
-            <input class="enviarform" type="submit" name="btn_registro" value="Crear usuario">
+            <input class="btn btn-primary btn-full" type="submit" name="btn_registro" value="Crear usuario">
         </form>
 
         <div class="login-access">

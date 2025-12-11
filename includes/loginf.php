@@ -4,7 +4,7 @@
     </div>
 <?php endif; ?>
 <link rel="stylesheet" href="assets/css/auth.css">
-<main>
+<main class="auth-main">
     <div class="auth-card">
         <h2>Inicio de sesión</h2>
         <form id="loginForm" name="LoginUser" method="post" action="">
@@ -17,7 +17,7 @@
                 <label for="password">Contraseña:</label>
                 <input id="password" name="password" type="password" required>
             </div>
-            <input class="enviarform" type="submit" name="btn_registro" value="Iniciar sesión">
+            <input class="btn btn-primary btn-full" type="submit" name="btn_registro" value="Iniciar sesión">
         </form>
         <div class="create-account-access">
             <p>¿No tienes una cuenta? <a href="index.php?var=register">Regístrate aquí</a></p>
