@@ -6,32 +6,26 @@ if (!isset($_SESSION['user_id']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 require '../config/db.php';
-
 try {
     $id_usuario = $_SESSION['user_id'];
-
     $name     = trim($_POST['name'] ?? '');
     $surname1 = trim($_POST['surname1'] ?? '');
     $surname2 = trim($_POST['surname2'] ?? '');
     $address  = trim($_POST['address'] ?? '');
     $city     = trim($_POST['city'] ?? '');
     $zip_code = trim($_POST['zip_code'] ?? '');
-
     if (empty($name)) {
         $errors[] = "El nombre es obligatorio.";
     }
     if (empty($surname1)) {
         $errors[] = "El primer apellido es obligatorio.";
     }
-
     if (empty($errors)) {
         //Si los datos no tienen errores actualizamos los datos del perfil del usuario por los nuevos valores introducidos.
         $sql = "UPDATE user SET name = :name, surname1 = :surname1,
                 surname2 = :surname2, address = :address, city = :city,
                 zip_code = :zip_code WHERE user_id = :id";
-
         $stmt = $pdo->prepare($sql);
-
         $resultado = $stmt->execute([
             ':name'     => $name,
             ':surname1' => $surname1,
@@ -41,7 +35,6 @@ try {
             ':zip_code' => $zip_code,
             ':id'       => $id_usuario
         ]);
-
         if ($resultado) {
             $_SESSION['name']     = $name;
             $_SESSION['surname1'] = $surname1;
@@ -49,7 +42,6 @@ try {
             $_SESSION['address']  = $address;
             $_SESSION['city']     = $city;
             $_SESSION['zip_code'] = $zip_code;
-
             header("Location: ../index.php?var=user_profile&view=my_data&status=success");
             exit;
         } else {

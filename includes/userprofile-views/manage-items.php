@@ -66,7 +66,6 @@ try {
                                     class="btn-details">
                                     Modificar
                                 </a>
-
                                 <form action="actions/delete_item.php" method="POST"
                                     onsubmit="return confirm('¿Estás seguro de borrar este producto?\n\nSe eliminará también del stock.\nEsta acción es irreversible.');"
                                     style="margin: 5;">
