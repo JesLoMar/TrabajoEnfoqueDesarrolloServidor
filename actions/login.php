@@ -2,7 +2,6 @@
 require __DIR__ . '/../config/db.php';
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    session_start();
     $username = trim($_POST["username"] ?? '');
     $email = trim($_POST["email"] ?? '');
     $password = $_POST["password"] ?? '';

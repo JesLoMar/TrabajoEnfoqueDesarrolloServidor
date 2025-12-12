@@ -1,5 +1,4 @@
 <?php
-session_start();
 //Reseteamos los valores de la sesión con un array vacío.
 $_SESSION = array();
 if (ini_get("session.use_cookies")) { //Si el server usa cookies para sesiones optiene config de la cookie actual.
