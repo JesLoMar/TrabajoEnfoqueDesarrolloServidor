@@ -1,5 +1,5 @@
 <?php
-require '../TrabajoEnfoqueDesarrolloServidor/config/db.php';
+require '../config/db.php';
 $errors = [];
 $data = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

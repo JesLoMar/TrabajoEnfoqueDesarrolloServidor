@@ -1,9 +1,9 @@
 <?php
 // Seteamos las variables para la base de datos.
-$host = 'localhost';
-$dbname = 'mydb';
-$user = 'root';
-$password = '';
+$host = getenv('DB_HOST');
+$dbname = getenv('DB_NAME');
+$user = getenv('DB_USER');
+$password = getenv('DB_PASS');
 
 
 try { //Intentamos establecer conexión a BD en un bloque de seguridad.
