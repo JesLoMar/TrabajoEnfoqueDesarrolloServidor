@@ -1,9 +1,10 @@
 <?php
 // Seteamos las variables para la base de datos.
-$host = getenv('DB_HOST');
-$dbname = getenv('DB_NAME');
-$user = getenv('DB_USER');
-$password = getenv('DB_PASS');
+$host = getenv('MYSQL_ADDON_HOST');
+$dbname = getenv('MYSQL_ADDON_DB');
+$user = getenv('MYSQL_ADDON_USER');
+$password = getenv('MYSQL_ADDON_PASSWORD');
+$port = getenv('MYSQL_ADDON_PORT');
 
 
 try { //Intentamos establecer conexión a BD en un bloque de seguridad.
