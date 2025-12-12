@@ -1,5 +1,5 @@
 <?php
-require '../config/db.php';
+require __DIR__ . '/../config/db.php';
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     session_start();
